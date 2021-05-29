@@ -23,7 +23,7 @@
 
 
 
-###  NGJ-Mall  Day-01
+###  MGJ-Mall  Day-01
 
 + 项目结构划分
 
@@ -65,13 +65,13 @@
           { path: '/home', component: Home }
       ]
   
-      // 创建对象
+      // 配置路由和组件之间的应用关系
       const router = new VueRouter({
           mode: 'history',
           routes
       })
   
-      // 导出
+      // 将 router 对象传入到 Vue 实例中
       export default router
   -----------------------------------------------------------
   ```
@@ -133,6 +133,72 @@
   const router = new VueRouter({
       mode: 'history' // 添加该配置即可在路径显示中去除 "#"
   })
+  ```
+
++ `router-link`的其他属性
+
+  ```javascript
+  <router-link to="/path" tag="tag-name[Eg. a -> button ]" active-class="class-name">  测试  </router-link>
+  
+  // 携带 query
+   <router-link :to="{path:'/home',query:{key:value,···}}">   测试  </router-link>
+  // 获取对应的query 值
+  $route.query.key | $route.query[获取整个对象]
+  ```
+
++ `vue-router`打包解析
+
+  ```javascript
+  
+  ```
+
++ 路由懒加载
+
+  ```javascript
+  // 路由懒加载最新写法
+  const Home = () => import('/home path')
+  
+  const routes = [
+      {
+          path: '/home',
+          component: Home
+      }
+  ]
+  ```
+
++ 路由嵌套
+
+  ```javascript
+  // 子路由
+  const Home = () => import('/home path')
+  
+  const routes = [
+      {
+          path: '/home',
+          component: Home,
+          children:[
+              {
+                  path: 'childrenRouter-path',
+                  component: ChildrenRouter
+              }
+          ]
+      },
+      
+      // 参数型
+      {
+          path: '/home/:homeId [:homeId 动态参数，router-link 的 to 需要同时携带相应的参数]' 
+      }
+  ]
+  
+  // 注意: 子路由的 <router-view></router-view> 位置，注意区分父路由的 router-view ，子路由也可以添加重定向
+  
+  
+  ```
+
++ 全局导航守卫
+
+  ```javascript
+  
   ```
 
   

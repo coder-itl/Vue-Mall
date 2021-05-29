@@ -37,47 +37,45 @@
   
   ```
 
-+ 新增路由模块使用
++ `VueRouter`使用
 
   ```javascript
   /*
   	1. 安装模块 npm install --save vue-router
   	2. 在 src 目录下新建文件夹 router,再在该文件夹下新建 "index.js" 文件
+  	3. 在 main.js 中引入 router，注册
+  	4. 注意: route 名称
   */ 
   
   index.js(路由基础使用):
   -----------------------------------------------------------
       import Vue from "vue"
-      import VueRouter from "router"
+      import VueRouter from "vue-router"
   
-      import Home from "../components/home/Home.vue"
-      // 1. 安装插件: 通过 Vue。use(插件)
+      // 路由懒加载
+      const Home = () => import('../components/home/Home');
+  
+  
+      // 安装插件 
       Vue.use(VueRouter)
   
-      // 定义映射路由
-      const routers = [
-          {
-              path: "/",
-              // 路由的默认路径
-              redirect: "/home"
-          },
-          {
-              path: "/home",
-              component: Home
-          }
+      // 映射
+      const routes = [
+          { path: '/', redirect: '/home' },
+          { path: '/home', component: Home }
       ]
   
+      // 创建对象
       const router = new VueRouter({
-          // 配置路由和组件之间的应用关系
-          routers, // es6 增强语法
-          mode: "history" // hash 模式
+          mode: 'history',
+          routes
       })
   
-      // 将 router 对象传入到 Vue 实例中
-      export default router;
+      // 导出
+      export default router
   -----------------------------------------------------------
   ```
-
+  
 + 箭头函数
 
   ```javascript
@@ -131,7 +129,15 @@
 
 + `hash`模式
 
+  ```javascript
+const router = new VueRouter({
+      mode: 'history' // 添加该配置即可在路径显示中去除 "#"
+  })
+  ```
   
-
+  
+  
+  
+  
   
 

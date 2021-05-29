@@ -44,7 +44,7 @@
   	1. 安装模块 npm install --save vue-router
   	2. 在 src 目录下新建文件夹 router,再在该文件夹下新建 "index.js" 文件
   	3. 在 main.js 中引入 router，注册
-  	4. 注意: route 名称
+  	4. 注意: routes 名称
   */ 
   
   index.js(路由基础使用):
@@ -134,6 +134,8 @@ const router = new VueRouter({
       mode: 'history' // 添加该配置即可在路径显示中去除 "#"
   })
   ```
+  
+  
   
   
   

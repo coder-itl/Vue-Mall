@@ -127,17 +127,19 @@
     通过用户请求的 url 导航到具体的 html 页面,每跳转到不同的 URL，都是重新访问服务端,然后服务端返回页面,页面可以是服务端获取数据m然后和模板组合,返回 HTML ，也可以是直接返回模板 HTML ，然后由前端 JS 再去请求数据,使用前端模板和数据进行组合,生成想要的 HTML
     ```
 
-+  `hash`模式
++ `hash`模式修改
 
   ```javascript
-    const router = new VueRouter({
-        mode: 'history' // 添加该配置即可在路径显示中去除 "#"
-    })
+  const router = new VueRouter({
+      mode: 'history' // 添加该配置即可在路径显示中去除 "#"
+  })
   ```
+
   
-  
-  
-  
-  
-  
+
+
+
+
+
+
 

@@ -211,10 +211,67 @@
 + 全局导航守卫
 
   ```javascript
+  1. 什么是导航守卫
+  	
+  	vue-router提供的导航守卫主要用来通过跳转或取消的方式守卫导航。
   
   ```
 
-  
+  ```javascript
+  官网了解更多关于导航守卫: "https://router.vuejs.org/zh/guide/advanced/navigation-guards.html"
+  ```
+
+###  MGJ-Mall Day-02
+
++ 路径别名配置
+
+  ```javascript
+  vue.config.js:
+  	------------------------------------------
+      // 新增自定义配置文件
+      module.exports = {
+        configureWebpack: {
+          resolve: {
+            alias: {
+              assets: '@/assets',
+              common: '@/components/common',
+              components: '@/components',
+              network: '@/network',
+            },
+          },
+        },
+      }
+      ------------------------------------------
+  ```
+
++ 组件封装
+
+  ```javascript
+  1. 封装组件	TabBar
+  2. 封装组件 TabBarItem
+  3. 封装组件 MainTabBar
+  ```
+
++ 动态封装组件路由点击颜色
+
+  ```javascript
+  props: {
+      path: String,
+      // 动态封装组件路由点击颜色
+      activeColor: {
+        type: String,
+        default: "red",
+      },
+    },
+        
+    computed:{
+         activeStyle() {
+        		return this.isActive ? { color: this.activeColor } : {};
+      	},
+    }
+  ```
+
+  <img src="https://gitee.com/wang_hong_bin/repo-bin/raw/master/coderwhyLVue.gif" width="400">
 
 
 

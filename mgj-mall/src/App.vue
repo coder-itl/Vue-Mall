@@ -1,20 +1,23 @@
 <template>
   <div id="app">
-    <router-link :to="/home/ + userId"> 动态路由测试 </router-link>
+    <main-tab-bar />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import MainTabBar from "components/content/mainTabBar/MainTabBar";
 export default {
   name: "App",
   data() {
-    return {
-      userId: "TestId",
-    };
+    return {};
   },
-  components: {},
+  components: {
+    MainTabBar,
+  },
 };
 </script>
 
-<style></style>
+<style>
+@import "./assets/css/base.css";
+</style>

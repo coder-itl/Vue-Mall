@@ -62,7 +62,14 @@
       // 映射
       const routes = [
           { path: '/', redirect: '/home' },
-          { path: '/home', component: Home }
+          // { path: '/home', component: Home } update: 2021-05-31 learn guild nav
+          {
+              path: '/home',
+              component: Home,
+              meta: {
+                title: '首页',
+              },
+          },
       ]
   
       // 配置路由和组件之间的应用关系
@@ -70,6 +77,12 @@
           mode: 'history',
           routes
       })
+      
+      // 全局导航首位 实现跳转时更换 title 功能
+      router.beforeEach((to, from, next) => {
+        document.title = to.matched[0].meta.title;
+        next();
+      });
   
       // 将 router 对象传入到 Vue 实例中
       export default router

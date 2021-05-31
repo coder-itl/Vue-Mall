@@ -237,15 +237,14 @@
             alias: {
               assets: '@/assets',
               common: '@/components/common',
-              components: '@/components',
-              network: '@/network',
+              components: '@/components'
             },
           },
         },
       }
       ------------------------------------------
   ```
-
+  
 + 组件封装
 
   ```javascript

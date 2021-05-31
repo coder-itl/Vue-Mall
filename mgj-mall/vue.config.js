@@ -4,8 +4,9 @@ module.exports = {
     resolve: {
       alias: {
         assets: '@/assets', // 静态资源路径别名
-        common: '@/components/common', // 共用组件路径别名【TODO: BUG ，应将 common 作为外层】
+        common: '@/common',
         components: '@/components', // 组件别名
+        views: '@/views',
       },
     },
   },

@@ -27,6 +27,8 @@
 
 + 项目结构划分
 
+  <img src="https://gitee.com/wang_hong_bin/repo-bin/raw/master/supermall.png" width="400">
+
 + `vue-cli 3`配置查看以及修改
 
   ```bash

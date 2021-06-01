@@ -3,7 +3,7 @@ export function request(config) {
   return new Promise((resolve, reject) => {
     // 1. 创建 axios 实例
     const instance = axios.create({
-      baseURL: '',
+      baseURL: 'http://152.136.185.210:7878/api/m5',
       timeout: 5000,
     })
     // 2. axios 拦截器的使用
@@ -12,7 +12,7 @@ export function request(config) {
     instance.interceptors.request.use(
       (config) => {
         console.log(config)
-        return config // 必须返回
+        return config // 必须返回 config
       },
       (err) => {
         console.log(err)
@@ -21,8 +21,9 @@ export function request(config) {
 
     // 相应拦截器
     instance.interceptors.response.use(
-      (resoult) => {
-        console.log(resoult)
+      (res) => {
+        console.log(res)
+        return res.data
       },
       (err) => {
         console.log(err)

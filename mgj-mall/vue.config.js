@@ -7,6 +7,7 @@ module.exports = {
         common: '@/common',
         components: '@/components', // 组件别名
         views: '@/views',
+        network: '@/network',
       },
     },
   },

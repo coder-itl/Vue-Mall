@@ -16,6 +16,112 @@
     <home-swiper :banners="banners" />
     <!-- recommends: 组件 -->
     <recommend-view :recommends="recommends" />
+    <!-- 图片列表组件 -->
+    <feature-view></feature-view>
+
+    <!-- 临时测试数据 -->
+    <ul>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+      <li>测试数据</li>
+    </ul>
   </div>
 </template>
 
@@ -24,6 +130,7 @@
 import NavBar from "components/common/navbar/NavBar"
 import HomeSwiper from "./childComps/HomeSwiper"
 import RecommendView from "./childComps/RecommendView"
+import FeatureView from "./childComps/FeatureView"
 
 // 导入 Home.vue 面向的 home.js
 import { getHomeMultidata } from "network/home"
@@ -32,7 +139,8 @@ export default {
   components: {
     NavBar,
     HomeSwiper,
-    RecommendView
+    RecommendView,
+    FeatureView
   },
   data() {
     return {
@@ -54,8 +162,17 @@ export default {
 </script>
 
 <style scoped>
+#home {
+  padding-top: 44px;
+}
 .home-nav {
   color: #fff;
   background-color: pink;
+  /* 固定顶部导航 */
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9;
 }
 </style>

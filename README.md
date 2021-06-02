@@ -354,9 +354,11 @@
 + 商品数据展示模型
 
   ```javascript
-  goods:{
-      
-  }
+   goods: {
+          'pop': { page: 0, list: [] },
+          'new': { page: 0, list: [] },
+          'sell': { page: 0, list: [] }
+        }
   ```
 
 + 如何将一个数组存放到另一个数组？

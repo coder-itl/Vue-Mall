@@ -152,26 +152,46 @@ export default {
       recommends: [],
       // 商品数据模型
       goods: {
-        pop: { page: 0, list: [] },
-        new: { page: 0, list: [] },
-        sell: { page: 0, list: [] }
+        'pop': { page: 0, list: [] },
+        'new': { page: 0, list: [] },
+        'sell': { page: 0, list: [] }
       }
     }
   },
   // 生命周期函数: 组件创造后立刻进行首页数据请求
   created() {
-    console.log('函数调用中···········');
     // 请求多个调用 可以使用 promise 是因为封装的时候 return instsnce属于promise，在这里获取结果就可以使用 then()
-    getHomeMultidata().then((res) => {
-      console.log('数据测试: 成功调用该函数', res);
-      this.banners = res.data.banner.list;
-      this.recommends = res.data.recommend.list;
-    })
+    this.getHomeMultidata()
 
     // 请求商品数据
-    getHomeGoods('pop', 1).then((res) => {
-      console.log('获取商品数据: ', res);
-    })
+    this.getHomeGoods('pop')
+    this.getHomeGoods('new')
+    this.getHomeGoods('cell')
+
+  },
+  methods: {
+    // 首页多个数据请求封装
+    getHomeMultidata() {
+      getHomeMultidata().then((res) => {
+        console.log('数据测试: 成功调用该函数', res);
+        this.banners = res.data.banner.list;
+        this.recommends = res.data.recommend.list;
+      })
+    },
+
+    getHomeGoods(type) {
+      // 动态获取
+      const page = this.goods[type].page + 1;
+
+      getHomeGoods(type, page).then((res) => {
+        console.log('获取商品数据: ', res);
+        // 需要将数据 push 新问题: 如何将一个数组存放到另一个数组？ 
+        this.goods[type].list.push(...res.data.list);
+        this.goods[type].page += 1;
+      })
+    }
+
+
   }
 };
 </script>

@@ -366,5 +366,29 @@
   + 循环
   + `...数组名`
 
++ 文字样式使用
+
+  ```css
+    /* 文字属性 */
+    text-overflow: ellipsis; /* 这个关键字的意思是“用一个省略号 ('…', U+2026 HORIZONTAL ELLIPSIS)来表示被截断的文本”。 */
+    white-space: nowrap; /* 和 normal 一样，连续的空白符会被合并。但文本内的换行无效。 */
+    margin-bottom: 3px;
+  ```
+
++ `flex`布局
+
+  ```css
+  父元素:
+  	display: flex;
+  子元素:
+  	flex: 1; /* 省略写法 */  查阅资料: [ https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex ]
+          flex-grow
+          flex-shrink
+          flex-basis
+  
+  ```
+
+  
+
 
 

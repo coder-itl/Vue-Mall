@@ -40,6 +40,7 @@ export default {
   text-align: center;
   /*TODO: 控制吸顶效果的临时背景颜色 */
   background-color: #fff;
+  z-index: 9;
 }
 .tab-control-item {
   flex: 1;

@@ -18,110 +18,10 @@
     <recommend-view :recommends="recommends" />
     <!-- 图片列表组件 -->
     <feature-view></feature-view>
-    <tab-control :titles="['流行', '新款', '精选']"></tab-control>
+    <tab-control :titles="['流行', '新款', '精选']" class="tab-control"></tab-control>
+    <goods-list :goods="goods['pop'].list"></goods-list>
     <!-- 临时测试数据 -->
-    <ul>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-      <li>测试数据</li>
-    </ul>
+
   </div>
 </template>
 
@@ -134,6 +34,7 @@ import RecommendView from "./childComps/RecommendView"
 import FeatureView from "./childComps/FeatureView"
 
 import TabControl from "components/content/tabControl/TabControl"
+import GoodsList from "components/content/goods/GoodsList"
 
 // 导入 Home.vue 面向的 home.js
 import { getHomeMultidata, getHomeGoods } from "network/home"
@@ -144,7 +45,8 @@ export default {
     HomeSwiper,
     RecommendView,
     FeatureView,
-    TabControl
+    TabControl,
+    GoodsList
   },
   data() {
     return {
@@ -208,6 +110,11 @@ export default {
   left: 0;
   right: 0;
   top: 0;
+  z-index: 9;
+}
+.tab-control {
+  position: sticky;
+  top: 44px;
   z-index: 9;
 }
 </style>

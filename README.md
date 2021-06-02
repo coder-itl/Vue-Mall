@@ -324,7 +324,34 @@
 
 ###  MGJ-Mall Day-03
 
++ `TabControl`产生小`BUG`
 
+  <img src="https://gitee.com/wang_hong_bin/repo-bin/raw/master/VuetitlesBug.png">
+
+  + 首先查看了书写过程,起初没检查出有效信息,进行了版本回退
+
+    ```bash
+    # 查看提交日志
+    git log --pretty=oneline
+    # 进行版本回退
+    git reset --hard commit-id
+    
+    # 发现回退错误,又进行未来版本回退
+    git reflog
+    
+    ```
+
+  + 最终解决方案
+
+    ```javascript
+    在经过仔细阅读代码后,发现在 tabControl.vue 文件中多了一个空白的 script 标签,导致 props 的 titles属性无法被父组件获取
+    
+    解决方案:
+    	删除 script 标签
+        
+    ```
+
+    
 
 
 

@@ -18,7 +18,7 @@
     <recommend-view :recommends="recommends" />
     <!-- 图片列表组件 -->
     <feature-view></feature-view>
-
+    <tab-control :titles="['流行', '新款', '精选']"></tab-control>
     <!-- 临时测试数据 -->
     <ul>
       <li>测试数据</li>
@@ -128,9 +128,12 @@
 <script>
 // 导入 NavBar 组件
 import NavBar from "components/common/navbar/NavBar"
+
 import HomeSwiper from "./childComps/HomeSwiper"
 import RecommendView from "./childComps/RecommendView"
 import FeatureView from "./childComps/FeatureView"
+
+import TabControl from "components/content/tabControl/TabControl"
 
 // 导入 Home.vue 面向的 home.js
 import { getHomeMultidata } from "network/home"
@@ -140,7 +143,8 @@ export default {
     NavBar,
     HomeSwiper,
     RecommendView,
-    FeatureView
+    FeatureView,
+    TabControl
   },
   data() {
     return {

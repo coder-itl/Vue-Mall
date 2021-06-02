@@ -13,14 +13,15 @@
           props: {}
         父组件: :banners="banners"  
      -->
-    <home-swiper :banners="banners" />
-    <!-- recommends: 组件 -->
-    <recommend-view :recommends="recommends" />
-    <!-- 图片列表组件 -->
-    <feature-view></feature-view>
-    <tab-control :titles="['流行', '新款', '精选']" class="tab-control" @tabClick="homeTabClick"></tab-control>
-    <goods-list :goods="showGoods"></goods-list>
-    <!-- 临时测试数据 -->
+    <scroll class="content">
+      <home-swiper :banners="banners" />
+      <!-- recommends: 组件 -->
+      <recommend-view :recommends="recommends" />
+      <!-- 图片列表组件 -->
+      <feature-view></feature-view>
+      <tab-control :titles="['流行', '新款', '精选']" class="tab-control" @tabClick="homeTabClick"></tab-control>
+      <goods-list :goods="showGoods"></goods-list>
+    </scroll>
 
   </div>
 </template>
@@ -35,6 +36,7 @@ import FeatureView from "./childComps/FeatureView"
 
 import TabControl from "components/content/tabControl/TabControl"
 import GoodsList from "components/content/goods/GoodsList"
+import Scroll from "components/common/scroll/Scroll"
 
 // 导入 Home.vue 面向的 home.js
 import { getHomeMultidata, getHomeGoods } from "network/home"
@@ -46,7 +48,8 @@ export default {
     RecommendView,
     FeatureView,
     TabControl,
-    GoodsList
+    GoodsList,
+    Scroll
   },
   data() {
     return {
@@ -135,7 +138,9 @@ export default {
 
 <style scoped>
 #home {
-  padding-top: 44px;
+  /* padding-top: 44px; */
+  position: relative;
+  height: 100vh;
 }
 .home-nav {
   color: #fff;
@@ -151,5 +156,15 @@ export default {
   position: sticky;
   top: 44px;
   z-index: 9;
+}
+.content {
+  /* height: calc(100% - 93px); */
+  overflow: hidden;
+
+  position: absolute;
+  top: 44px;
+  bottom: 49px;
+  left: 0;
+  right: 0;
 }
 </style>

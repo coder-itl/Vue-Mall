@@ -467,7 +467,7 @@
        }
        ```
 
-    2. 封装
+    2. 基础使用过程
 
        ```javascript
        <template>
@@ -510,15 +510,38 @@
          },
          mounted() {
            this.scroll = new BScroll('.wrapper', {
-       
+               // 几个重要的参数
+               probeType: [ 0 | 1 | 2 | 3 ],
+               /*
+               默认情况下 BScroll 是不可以实时的监听滚动位置
+               probe 侦测
+               0,1 都是不侦测实时位置
+               2: 在手指滚动的过程中侦测,手指离开后的惯性滚动过程中不侦测
+               3: 只要是滚动,都侦测
+               */
+               click: true, // [在内部默认false,不能进行原生事件监听]
+               pullUpLoad: true // 开启下拉加载更多，需要监听事件 
            })
            console.log(document.querySelector('.wrapper'));
+             
+             
+           // 
+             this.scroll.on('pullingUp',()=>{
+               	bscroll.finishPullUp()
          }
        
        
        }
        </script>
        ```
+
+    3.  封装`BScroll`
+
+       ```javascript
+       
+       ```
+
+       
 
        
 

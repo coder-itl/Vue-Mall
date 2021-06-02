@@ -388,6 +388,59 @@
   
   ```
 
++ 子组件的自定义事件
+
+  ```javascript
+  TabControl.vue:
+  	itemClick(index) {
+        this.currentIndex = index;
+        // 自定义事件: 子传父 this.$emit('自定义事件名称',参数)
+        this.$emit('tabClick', index) 
+      }
+  
+  ```
+
+  ```javascript
+  /*
+  * 获取自定义事件
+  */
+  
+  @tabClick="homeTabClick"
+  
+  -------------------------------------------------
+  
+  Home.vue:
+      homeTabClick(index) {
+        console.log('$emit事件获取监听');
+        console.log(index);
+       	...
+    
+      
+  ```
+
+  + `switch...case`
+
+    ```javascript
+     ...
+    
+     switch (index) {
+            case 0:
+              this.currentType = 'pop';
+              break;
+            case 1:
+              this.currentType = 'new';
+              break;
+            case 2:
+              this.currentType = 'sell';
+              break;
+          }
+    
+    
+      }, // homeTabClick 结束代码块
+    ```
+
+    
+
   
 
 

@@ -3,7 +3,7 @@
     <router-view></router-view>
     <!-- 底部导航: nav-bar -->
     <nav-bar class="home-nav">
-      <div slot="center">购物街</div>
+      <div slot="center">Vue-框架学习项目案例</div>
     </nav-bar>
 
     <!-- 
@@ -18,8 +18,8 @@
     <recommend-view :recommends="recommends" />
     <!-- 图片列表组件 -->
     <feature-view></feature-view>
-    <tab-control :titles="['流行', '新款', '精选']" class="tab-control"></tab-control>
-    <goods-list :goods="goods['pop'].list"></goods-list>
+    <tab-control :titles="['流行', '新款', '精选']" class="tab-control" @tabClick="homeTabClick"></tab-control>
+    <goods-list :goods="showGoods"></goods-list>
     <!-- 临时测试数据 -->
 
   </div>
@@ -54,10 +54,12 @@ export default {
       recommends: [],
       // 商品数据模型
       goods: {
-        'pop': { page: 0, list: [] },
-        'new': { page: 0, list: [] },
-        'sell': { page: 0, list: [] }
-      }
+        pop: { page: 0, list: [] },
+        new: { page: 0, list: [] },
+        sell: { page: 0, list: [] }
+      },
+      // 保存数据类型
+      currentType: 'pop' // 第一次为 pop 类型
     }
   },
   // 生命周期函数: 组件创造后立刻进行首页数据请求
@@ -68,10 +70,34 @@ export default {
     // 请求商品数据
     this.getHomeGoods('pop')
     this.getHomeGoods('new')
-    this.getHomeGoods('cell')
+    this.getHomeGoods('sell')
 
   },
   methods: {
+
+    /*
+    * 事件监听相关的方法
+    */
+
+    homeTabClick(index) {
+      console.log('$emit事件获取监听');
+      console.log(index);
+      switch (index) {
+        case 0:
+          this.currentType = 'pop';
+          break;
+        case 1:
+          this.currentType = 'new';
+          break;
+        case 2:
+          this.currentType = 'sell';
+          break;
+      }
+    },
+
+    /*
+    * 网络请求清关的方法
+    */
     // 首页多个数据请求封装
     getHomeMultidata() {
       getHomeMultidata().then((res) => {
@@ -92,9 +118,18 @@ export default {
         this.goods[type].page += 1;
       })
     }
-
-
+  },
+  computed: {
+    /*
+    *  1. 再将 goods 简化
+    *  2. 计算属性中获取变量需要前缀 this 
+    */
+    showGoods() {
+      return this.goods[this.currentType].list
+    }
   }
+
+
 };
 </script>
 

@@ -439,7 +439,98 @@
       }, // homeTabClick 结束代码块
     ```
 
++ 演示效果
+
+  <img src="https://img-blog.csdnimg.cn/20210602153321308.gif#pic_center" alt="day-03" style="zoom: 80%;" />
+
+  
+
++ `better-scroll`库的使用
+
+  + 安装
+
+    ```bash
+    npm install better-scroll --save
+    ```
+
+  + 实现局部滚动的方法
+
+    1.  原生
+
+       ```css
+       /* 内容盒子 */
+       .content {
+         height: 200px;
+         background-color: pink;
+       
+         overflow-y: scroll; /* Y 轴区域滚动 */
+       }
+       ```
+
+    2. 封装
+
+       ```javascript
+       <template>
+         <div id="categories">
+           <h1> 分类 </h1>
+           <div class="wrapper">
+             <ul class="content">
+               <li>Better-Scroll数据测试1</li>
+               <li>Better-Scroll数据测试2</li>
+                 ...
+               <li>Better-Scroll数据测试99</li>
+               <li>Better-Scroll数据测试100</li>
+             </ul>
+           </div>
+         </div>
+       </template>
+       
+       <style scoped>
+       .wrapper {
+         height: 200px;
+         background-color: pink;
+       
+         overflow: hidden;
+       
+       }
+       </style>
+       
+       <script>
+       import BScroll from 'better-scroll'
+       
+       export default {
+         data() {
+           return {
+             scroll: null
+           }
+         },
+         // 实现生命周期函数
+         created() {
+       
+         },
+         mounted() {
+           this.scroll = new BScroll('.wrapper', {
+       
+           })
+           console.log(document.querySelector('.wrapper'));
+         }
+       
+       
+       }
+       </script>
+       ```
+
+       
+
+       
+
     
+
+  
+
+  
+
+  
 
   
 

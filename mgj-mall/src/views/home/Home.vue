@@ -136,7 +136,7 @@ import FeatureView from "./childComps/FeatureView"
 import TabControl from "components/content/tabControl/TabControl"
 
 // 导入 Home.vue 面向的 home.js
-import { getHomeMultidata } from "network/home"
+import { getHomeMultidata, getHomeGoods } from "network/home"
 
 export default {
   components: {
@@ -149,7 +149,13 @@ export default {
   data() {
     return {
       banners: [], // 默认值为: []
-      recommends: []
+      recommends: [],
+      // 商品数据模型
+      goods: {
+        pop: { page: 0, list: [] },
+        new: { page: 0, list: [] },
+        sell: { page: 0, list: [] }
+      }
     }
   },
   // 生命周期函数: 组件创造后立刻进行首页数据请求
@@ -160,6 +166,11 @@ export default {
       console.log('数据测试: 成功调用该函数', res);
       this.banners = res.data.banner.list;
       this.recommends = res.data.recommend.list;
+    })
+
+    // 请求商品数据
+    getHomeGoods('pop', 1).then((res) => {
+      console.log('获取商品数据: ', res);
     })
   }
 };

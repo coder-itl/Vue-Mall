@@ -13,7 +13,7 @@
           props: {}
         父组件: :banners="banners"  
      -->
-    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
+    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll" :pull-up-load="true">
       <home-swiper :banners="banners" />
       <!-- recommends: 组件 -->
       <recommend-view :recommends="recommends" />
@@ -112,6 +112,7 @@ export default {
       console.log(position);
       this.isShowBackTop = (-position.y) > 1000;
     },
+    // 上拉加载更多
 
     /*
     * 网络请求清关的方法
@@ -134,6 +135,8 @@ export default {
         // 需要将数据 push 新问题: 如何将一个数组存放到另一个数组？ 
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
+
+
       })
     }
   },

@@ -34,12 +34,13 @@ export default {
       // console.log(position); 输出封装
       this.$emit('scroll', position);
     })
-    
+
   },
   methods: {
     scrollTo(x, y, time = 300) {
       this.scroll.scrollTo(x, y, time)
-    }
+    },
+
   }
 }
 </script>

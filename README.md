@@ -55,52 +55,51 @@
       // 路由懒加载
       const Home = () => import('../components/home/Home');
   ```
-
-
-      // 安装插件
-      Vue.use(VueRouter)
-
-      // 映射
-      const routes = [
-          { path: '/', redirect: '/home' },
-          // { path: '/home', component: Home } update: 2021-05-31 learn guild nav
-          {
-              path: '/home',
-              component: Home,
-              meta: {
-                title: '首页',
-              },
-          },
-      ]
-
-      // 配置路由和组件之间的应用关系
-      const router = new VueRouter({
-          mode: 'history',
-          routes
-      })
-
-      // 全局导航首位 实现跳转时更换 title 功能
-      router.beforeEach((to, from, next) => {
-        document.title = to.matched[0].meta.title;
-        next();
-      });
-
-      // 将 router 对象传入到 Vue 实例中
-      export default router
-
----
-
-````
+  
+  ```javascript
+  // 安装插件
+    Vue.use(VueRouter)
+  
+    // 映射
+    const routes = [
+        { path: '/', redirect: '/home' },
+        // { path: '/home', component: Home } update: 2021-05-31 learn guild nav
+        {
+            path: '/home',
+            component: Home,
+            meta: {
+              title: '首页',
+            },
+        },
+    ]
+  
+    // 配置路由和组件之间的应用关系
+    const router = new VueRouter({
+        mode: 'history',
+        routes
+    })
+  
+    // 全局导航首位 实现跳转时更换 title 功能
+    router.beforeEach((to, from, next) => {
+      document.title = to.matched[0].meta.title;
+      next();
+    });
+  
+    // 将 router 对象传入到 Vue 实例中
+    export default router
+  ```
+  
+  
 
 - 箭头函数
 
-```javascript
-
-问题: 箭头函数中的 this 是如何查找的？
-
-答案: 向外层作用域,一层层查找 this ,直到有 this 的定义
-
-````
+  ```javascript
+  
+  问题: 箭头函数中的 this 是如何查找的？
+  
+  答案: 向外层作用域,一层层查找 this ,直到有 this 的定义
+  
+  ```
 
 - 前端渲染后端渲染和前端路由后端路由
 
@@ -165,6 +164,7 @@
 - `vue-router`打包解析
 
   ```javascript
+  ...
   ```
 
 - 路由懒加载
@@ -222,28 +222,30 @@
   官网了解更多关于导航守卫: 'https://router.vuejs.org/zh/guide/advanced/navigation-guards.html'
   ```
 
+
+
 ### MGJ-Mall Day-02
 
 - 路径别名配置
 
   ```javascript
-  vue.config.js:
-  	------------------------------------------
-     // 新增自定义配置文件
-      module.exports = {
-        configureWebpack: {
-          resolve: {
-            alias: {
-              assets: '@/assets', // 静态资源路径别名
-              common: '@/common',
-              components: '@/components', // 组件别名
-              views: '@/views',
-              network: '@/network', // 网络封装
+    vue.config.js:
+      ------------------------------------------
+      // 新增自定义配置文件
+        module.exports = {
+          configureWebpack: {
+            resolve: {
+              alias: {
+                assets: '@/assets', // 静态资源路径别名
+                common: '@/common',
+                components: '@/components', // 组件别名
+                views: '@/views',
+                network: '@/network', // 网络封装
+              },
             },
           },
-        },
-      }
-      ------------------------------------------
+        }
+        ------------------------------------------
   ```
 
 - 组件封装
@@ -316,6 +318,8 @@
 - 封装`axios`前期出现`bug`,已经更正,成功请求首页轮播图数据
 
   <img src="https://gitee.com/wang_hong_bin/repo-bin/raw/master/vueaxiosBug.png">
+
+
 
 ### MGJ-Mall Day-03
 
@@ -392,18 +396,18 @@
         // 自定义事件: 子传父 this.$emit('自定义事件名称',参数)
         this.$emit('tabClick', index)
       }
-
+  
   ```
 
   ```javascript
   /*
   * 获取自定义事件
   */
-
+  
   @tabClick="homeTabClick"
-
+  
   -------------------------------------------------
-
+  
   Home.vue:
       homeTabClick(index) {
         console.log('$emit事件获取监听');
@@ -411,28 +415,26 @@
        	...
   ```
 
-````
+  - `switch...case`
 
-- `switch...case`
-
-  ```javascript
-   ...
-
-   switch (index) {
-          case 0:
-            this.currentType = 'pop';
-            break;
-          case 1:
-            this.currentType = 'new';
-            break;
-          case 2:
-            this.currentType = 'sell';
-            break;
-        }
-
-
-    }, // homeTabClick 结束代码块
-  ```
+    ```javascript
+     ...
+    
+       switch (index) {
+              case 0:
+                this.currentType = 'pop';
+                break;
+              case 1:
+                this.currentType = 'new';
+                break;
+              case 2:
+                this.currentType = 'sell';
+                break;
+            }
+    
+    
+        }, // homeTabClick 结束代码块
+    ```
 
 - 演示效果
 
@@ -516,53 +518,51 @@
              pullUpLoad: true // 开启下拉加载更多，需要监听事件
          })
          console.log(document.querySelector('.wrapper'));
-
-
-         //
+           //
            this.scroll.on('pullingUp',()=>{
-             	bscroll.finishPullUp()
-       }
-
-
-     }
-     </script>
+               bscroll.finishPullUp()
+           }
+                           }
+      </script>
      ```
+
+
 
   3. 封装`BScroll`
 
-  ```javascript
-  <template>
-    <div class="wrapper" ref="wrapper">
-      <div class="content">
-        <slot></slot>
-      </div>
-    </div>
-  </template>
-
-  <script>
-  import BScroll from "better-scroll"
-  export default {
-    data() {
-      return {
-        scroll: null
-      }
-    },
-    // 挂载后的生命周期函数
-    mounted() {
-      // 用变量保存
-      this.scroll = new BScroll(this.$refs.wrapper, {})
-    }
-  }
-  </script>
-  ```
+     ```javascript
+      <template>
+         <div class="wrapper" ref="wrapper">
+           <div class="content">
+             <slot></slot>
+           </div>
+         </div>
+       </template>
+     
+       <script>
+       import BScroll from "better-scroll"
+       export default {
+         data() {
+           return {
+             scroll: null
+           }
+         },
+         // 挂载后的生命周期函数
+         mounted() {
+           // 用变量保存
+           this.scroll = new BScroll(this.$refs.wrapper, {})
+         }
+       }
+       </script>
+     ```
 
 - 组件所有的`原生`事件监听，需要使用`修饰符.native`
 
-```javascript
-// back-top 组件
-<back-top @click.native="backClick"></back-top>
-
-````
+  ```javascript
+  // back-top 组件
+  <back-top @click.native="backClick"></back-top>
+  
+  ```
 
 - 实现返回顶部原理
 

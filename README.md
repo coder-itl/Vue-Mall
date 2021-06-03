@@ -565,18 +565,50 @@
 
        
 
-       
++ 组件所有的`原生`事件监听，需要使用`修饰符.native`
 
-       
+  ```javascript
+  // back-top 组件
+  <back-top @click.native="backClick"></back-top>
+  
+  ```
+
+  + 实现返回顶部原理
+
+    ```javascript
+  /*
+    1. 组件注册点击事件
+  2. 封装 scrollTo(x,y,time)
+    3. this.$refs.scroll.scrollTo(0, 0, 500)
+  */ 
+    ```
+
+  + 第三方插件使用思想
+
+    ```javascript
+  为避免过度依赖第三方插件使用,使用之前先对第三方插件进行`组件`封装,这样做的优势在于后期维护性
+    ```
 
     
-
   
-
   
-
   
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
 
 

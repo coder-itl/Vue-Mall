@@ -13,7 +13,7 @@
           props: {}
         父组件: :banners="banners"  
      -->
-    <scroll class="content">
+    <scroll class="content" ref="scroll">
       <home-swiper :banners="banners" />
       <!-- recommends: 组件 -->
       <recommend-view :recommends="recommends" />
@@ -22,7 +22,8 @@
       <tab-control :titles="['流行', '新款', '精选']" class="tab-control" @tabClick="homeTabClick"></tab-control>
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
-
+    <!-- BackTop 组件 -->
+    <back-top @click.native="backClick"></back-top>
   </div>
 </template>
 
@@ -37,6 +38,7 @@ import FeatureView from "./childComps/FeatureView"
 import TabControl from "components/content/tabControl/TabControl"
 import GoodsList from "components/content/goods/GoodsList"
 import Scroll from "components/common/scroll/Scroll"
+import BackTop from "components/content/backTop/BackTop"
 
 // 导入 Home.vue 面向的 home.js
 import { getHomeMultidata, getHomeGoods } from "network/home"
@@ -49,7 +51,8 @@ export default {
     FeatureView,
     TabControl,
     GoodsList,
-    Scroll
+    Scroll,
+    BackTop
   },
   data() {
     return {
@@ -96,6 +99,12 @@ export default {
           this.currentType = 'sell';
           break;
       }
+    },
+    backClick() {
+      console.log('组件事件监听: 返回顶部按钮得到点击');
+      // this.$refs.scroll[ref属性scroll].scroll[data变量scroll].scrollTo(0, 0, 500) [ (x,y,time) ]
+      // this.$refs.scroll.scroll.scrollTo(0, 0, 500) 在组件内部进行方法封装
+      this.$refs.scroll.scrollTo(0, 0, 500)
     },
 
     /*

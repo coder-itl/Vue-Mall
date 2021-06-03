@@ -566,9 +566,11 @@
 
 - 实现返回顶部原理
 
+  ```javascript
   1.  组件注册点击事件
   2.  `封装 scrollTo(x,y,time)`
   3.  `this.$refs.scroll.scrollTo(0, 0, 500)`
+  ```
 
 - 第三方插件使用思想
 

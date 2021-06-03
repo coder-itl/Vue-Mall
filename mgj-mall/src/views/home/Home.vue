@@ -13,7 +13,7 @@
           props: {}
         父组件: :banners="banners"  
      -->
-    <scroll class="content" ref="scroll">
+    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
       <home-swiper :banners="banners" />
       <!-- recommends: 组件 -->
       <recommend-view :recommends="recommends" />
@@ -23,7 +23,7 @@
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
     <!-- BackTop 组件 -->
-    <back-top @click.native="backClick"></back-top>
+    <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   </div>
 </template>
 
@@ -65,7 +65,8 @@ export default {
         sell: { page: 0, list: [] }
       },
       // 保存数据类型
-      currentType: 'pop' // 第一次为 pop 类型
+      currentType: 'pop', // 第一次为 pop 类型
+      isShowBackTop: false // 默认 false-> 隐藏，true-> 显示
     }
   },
   // 生命周期函数: 组件创造后立刻进行首页数据请求
@@ -105,6 +106,11 @@ export default {
       // this.$refs.scroll[ref属性scroll].scroll[data变量scroll].scrollTo(0, 0, 500) [ (x,y,time) ]
       // this.$refs.scroll.scroll.scrollTo(0, 0, 500) 在组件内部进行方法封装
       this.$refs.scroll.scrollTo(0, 0, 500)
+    },
+    // scroll 输出封装
+    contentScroll(position) {
+      console.log(position);
+      this.isShowBackTop = (-position.y) > 1000;
     },
 
     /*

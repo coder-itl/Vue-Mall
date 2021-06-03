@@ -577,3 +577,42 @@
   ```javascript
     为避免过度依赖第三方插件使用,使用之前先对第三方插件进行`组件`封装,这样做的优势在于后期维护性
   ```
+  
+- `Back-Top`的显示与影藏
+
+  ```javascript
+  
+  Scroll.vue:
+  	 // 2. 监听滚动位置
+      this.scroll.on('scroll', (position) => {
+        // 文档地址
+        // console.log('Better-Scroll 文档地址: https://better-scroll.github.io/docs/zh-CN/guide/');
+        // console.log(position); 输出封装
+        this.$emit('scroll', position); 
+      })
+  
+  -----------------------------------------------------------------
+          
+  Home.vue:
+      data(){
+          return {
+              isShowBackTop: false // 默认 false-> 隐藏，true-> 显示
+          }
+      }
+  	// 自定义事件
+      contentScroll(position) {
+          console.log(position);
+          this.isShowBackTop = (-position.y) > 1000;
+      },
+  
+          
+  ```
+
+  
+
+
+
+
+
+###  MGJ-Mall Day-04
+

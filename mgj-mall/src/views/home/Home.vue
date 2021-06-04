@@ -16,7 +16,8 @@
           props: {}
         父组件: :banners="banners"  
      -->
-    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
+    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll" :pull-up-load="true"
+      @pullingUp="loadMore">
       <home-swiper :banners="banners" />
       <!-- recommends: 组件 -->
       <recommend-view :recommends="recommends" />
@@ -137,6 +138,10 @@ export default {
     },
 
     // 上拉加载更多
+    loadMore() {
+      // alert('Home Load More'); currentType 记录选中类型
+      this.getHomeGoods(this.currentType)
+    },
 
     /*
     * 网络请求清关的方法
@@ -160,7 +165,8 @@ export default {
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
 
-
+        // 完成上拉加载更多
+        this.$refs.scroll.finishPullUp();
       })
     }
   },

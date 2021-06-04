@@ -9,6 +9,10 @@
       </div>
     </nav-bar>
 
+    <tab-control :titles="['流行', '新款', '精选']" class="tab-control" @tabClick="homeTabClick" ref="tabControll"
+      v-show="isTabFixed">
+    </tab-control>
+
     <!-- 
       轮播图: swiper
       使用props(父子组件通信): 
@@ -18,12 +22,13 @@
      -->
     <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll" :pull-up-load="true"
       @pullingUp="loadMore">
-      <home-swiper :banners="banners" />
+      <home-swiper :banners="banners" @swiperImageLoad="swiperImageLoad" />
       <!-- recommends: 组件 -->
       <recommend-view :recommends="recommends" />
       <!-- 图片列表组件 -->
       <feature-view></feature-view>
-      <tab-control :titles="['流行', '新款', '精选']" class="tab-control" @tabClick="homeTabClick"></tab-control>
+      <tab-control :titles="['流行', '新款', '精选']" @tabClick="homeTabClick" ref="tabControl">
+      </tab-control>
       <goods-list :goods="showGoods"></goods-list>
     </scroll>
     <!-- BackTop 组件 -->
@@ -70,7 +75,9 @@ export default {
       },
       // 保存数据类型
       currentType: 'pop', // 第一次为 pop 类型
-      isShowBackTop: false // 默认 false-> 隐藏，true-> 显示
+      isShowBackTop: false,// 默认 false-> 隐藏，true-> 显示
+      tabOffsetTop: 0, // offsetTop 偏移量存储
+      isTabFixed: false // 是否吸顶
     }
   },
   // 生命周期函数: 组件创造后立刻进行首页数据请求
@@ -86,6 +93,7 @@ export default {
 
   },
   mounted() {
+    // 1. 图片加载完成的事件监听
     const refresh = this.debounce(this.$refs.scroll.refresh, 500);
     // 监听 item 中图片加载完成
     this.$bus.$on('itemImageLoad', () => {
@@ -124,17 +132,23 @@ export default {
           this.currentType = 'sell';
           break;
       }
+      // 对两个 tabcontrol 进行统一
+      this.$refs.tabControll.currentIndex = index;
+      this.$refs.tabControl.currentIndex = index;
     },
     backClick() {
-      console.log('组件事件监听: 返回顶部按钮得到点击');
+      // console.log('组件事件监听: 返回顶部按钮得到点击');
       // this.$refs.scroll[ref属性scroll].scroll[data变量scroll].scrollTo(0, 0, 500) [ (x,y,time) ]
       // this.$refs.scroll.scroll.scrollTo(0, 0, 500) 在组件内部进行方法封装
       this.$refs.scroll.scrollTo(0, 0, 500)
     },
     // scroll 输出封装
     contentScroll(position) {
-      console.log(position);
+      // console.log(position);
+      // 1. 判断backtop 是否显示
       this.isShowBackTop = (-position.y) > 1000;
+      // 2. 决定 tabControl 是否吸顶(position:fixed)
+      this.isTabFixed = (-position.y) > this.tabOffsetTop;
     },
 
     // 上拉加载更多
@@ -142,7 +156,11 @@ export default {
       // alert('Home Load More'); currentType 记录选中类型
       this.getHomeGoods(this.currentType)
     },
-
+    // 监听轮播图加载函数 
+    swiperImageLoad() {
+      // 获取 tabControl 的 offsetTop 
+      this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop;
+    },
     /*
     * 网络请求清关的方法
     */
@@ -194,17 +212,21 @@ export default {
   color: #fff;
   background-color: pink;
   /* 固定顶部导航 */
-  position: fixed;
+  /*   position: fixed;
   left: 0;
   right: 0;
   top: 0;
-  z-index: 9;
+  z-index: 9; */
 }
+/* update: 吸顶问题  */
 .tab-control {
-  position: sticky;
+  /*   position: sticky;
   top: 44px;
-  z-index: 9;
+  z-index: 9; */
+  position: relative;
+  z-index: 10;
 }
+
 .content {
   /* height: calc(100% - 93px); */
   overflow: hidden;

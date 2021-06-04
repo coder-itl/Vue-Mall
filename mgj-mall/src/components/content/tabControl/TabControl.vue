@@ -36,8 +36,11 @@ export default {
 .tab-control {
   display: flex;
 
-  height: 40px;
-  line-height: 40px;
+  height: 41px;
+
+  margin-top: -1px;
+
+  line-height: 41px;
   font-size: 15px;
   text-align: center;
   /*TODO: 控制吸顶效果的临时背景颜色 */

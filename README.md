@@ -674,26 +674,54 @@
        如果我们直接执行 refresh，那么 refresh函数会被执行 30 次m我们可以将 refresh 函数传入到 debounce【防抖】 函数中,生成一个新的函数，之后在调用非常频繁的时候m就是用新生成的函数，而新生成的函数并不会非常频繁的调用,如果下一次执行来的非常快,那么会将上一次取消掉
        ```
 
-       
+     
 
-+ 上拉加载更多优化
++ 吸顶效果实现
 
      ```javascript
+     // 对 tab-control 组件复用, 
+     
+     homeClick(){
+         // 对两个 tabcontrol 进行统一
+         this.$refs.tabControll.currentIndex = index;
+         this.$refs.tabControl.currentIndex = index;
+     }
      
      ```
 
-     
++ 如何获取一个组件的元素
 
-     
+  ```javascript
+  TabControl.vue:
+      <tab-control ref="tabControl">
+      	<div>
+          	...
+          </div>    
+      </tab-control>
+  
+  
+  methods:{
+      getTabControlc(){
+          this.$refs.tabControl.$el
+      }
+  }
+  ```
 
-     
+  
 
-     
 
-     
 
-     
 
-     
 
-     
+
+
+
+
+
+
+
+
+
+
+
+

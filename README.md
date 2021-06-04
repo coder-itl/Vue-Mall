@@ -615,14 +615,77 @@
 + `Butter-Scroll`带来的`BUG`分析与解决
 
   ```javascript
-  由于使用 butter-scroll 在网络请求时，网速问题引起的图片加载时间问题,导致不能正确计算可滚动区域高度,导致上拉加载更多出现异常
+  Better-Scroll 在决定有多少区域可以滚动时，时根据 scrollHeight 属性决定
+  	scrollHeight 属性是根据 Better-Scroll 的 content 中的子组件的高度,但是我们的首页中m刚开始在计算 scrollHeight 属性时,是没有将图片计算在内的，所以，计算出来的是一个错误数据,后来图片加载进来之后有了新的高度,但是 scrollHeight 属性并没有进行更新,所以出现了滚动的问题.
   ```
+  
++ 解决方案
 
-  + 解决方案
+  ```javascript
+  监听每一张图片是否加载完成,只要有一张图片加载完成了,执行一次 refresh()
+  ```
+  + 如何监听图片加载完成了
+    
+      + 原生的`js`监听图片:`img.onload = function(){}`
+      + `Vue`中监听：`@load='方法'`
+      
+      
+  + 事件总线
   
     ```javascript
-    1. Vuex
-    2. 事件总线 *
-    ```
-  
+    main.js:
     
+      Vue.protoType.$bus = new Vue()
+    
+  ```
+    
++ 防抖
+
+     ```javascript
+     
+      mounted() {
+         const refresh = this.debounce(this.$refs.scroll.refresh,500);
+         // 监听 item 中图片加载完成
+         this.$bus.$on('itemImageLoad', () => {
+           // 防抖
+           refresh();
+         });
+     
+       },
+           
+     methods:{
+         // 防抖函数
+         debounce(func, delay) {
+           let timer = null;
+           return function (...args) {
+             if (timer) clearTimeout(timer)
+             timer = setTimeout(() => {
+               func.apply(this, args)
+             }, delay)
+           }
+         },
+     }
+     
+     ```
+
+     + 防抖函数起作用的过程
+
+       ```javascript
+       如果我们直接执行 refresh，那么 refresh函数会被执行 30 次m我们可以将 refresh 函数传入到 debounce【防抖】 函数中,生成一个新的函数，之后在调用非常频繁的时候m就是用新生成的函数，而新生成的函数并不会非常频繁的调用,如果下一次执行来的非常快,那么会将上一次取消掉
+       ```
+
+       
+
+       
+
+     
+
+     
+
+     
+
+     
+
+     
+
+     

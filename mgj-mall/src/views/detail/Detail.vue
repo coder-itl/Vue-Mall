@@ -1,10 +1,12 @@
 <template>
-  <div>
-    <h1> Detail page </h1>
+  <div id="detail">
+    <router-view></router-view>
+    <detail-nav-bar></detail-nav-bar>
   </div>
 </template>
 
 <script>
+import DetailNavBar from "./childComps/DetailNavBar"
 export default {
   data() {
     return {
@@ -15,7 +17,9 @@ export default {
     this.iid = this.$route.params.iid;
     console.log('detail create');
   },
-  components: {},
+  components: {
+    DetailNavBar
+  },
 }
 </script>
 

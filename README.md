@@ -707,6 +707,26 @@
   }
   ```
 
++ 保留状态
+
+  ```javascript
+  1. keep-alive
+  	<keep-alive>
+     		<router-view></router-view> 
+      </keep-alive>
+  
+  2. 记录值
+        activated() {
+          // 0,y,time
+          this.$refs.scroll.scrollTo(0, this.saveY, 0);
+          this.$refs.scroll.refresh();
+        },
+        deactivated() {
+          this.saveY = this.$refs.scroll.getScollY();
+        },
+  
+  ```
+
   
 
 

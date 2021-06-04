@@ -77,7 +77,8 @@ export default {
       currentType: 'pop', // 第一次为 pop 类型
       isShowBackTop: false,// 默认 false-> 隐藏，true-> 显示
       tabOffsetTop: 0, // offsetTop 偏移量存储
-      isTabFixed: false // 是否吸顶
+      isTabFixed: false, // 是否吸顶
+      saveY: 0
     }
   },
   // 生命周期函数: 组件创造后立刻进行首页数据请求
@@ -188,6 +189,17 @@ export default {
       })
     }
   },
+
+  activated() {
+    // 0,y,time
+    this.$refs.scroll.scrollTo(0, this.saveY, 0);
+    this.$refs.scroll.refresh();
+  },
+  deactivated() {
+    this.saveY = this.$refs.scroll.getScollY();
+  },
+
+
   computed: {
     /*
     *  1. 再将 goods 简化

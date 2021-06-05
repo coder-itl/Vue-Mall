@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <main-tab-bar />
-    <keep-alive>
+    <keep-alive exclude="Detail">
       <router-view></router-view>
     </keep-alive>
+
   </div>
 </template>
 

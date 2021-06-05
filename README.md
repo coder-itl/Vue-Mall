@@ -740,35 +740,42 @@
   ```javascript
   // axios 封装时如何使用 query 
   
-  params --> query 如何改写? 
+  ```
+
++ 如何让一个组件不进行缓存(`刷新执行 create(){}`)，`未生效，详情页轮播图数据需要强制刷新?`
+
+  ```javascript
+  <keep-alive exclude="Detail">
+        <router-view></router-view>
+  </keep-alive>
   
-  import { request } from './request'
+  exclude="不被包含的组件名称"
   
-  axios:
-      export function getDetail(iid) {
-        return request({
-          url: '/detail',
-          params: {
-            iid,
-          },
-        })
-      }
-  
-  
-  itemClick() {
-        console.log('item image click'); // 详情页跳转
-        // this.$router.push('/detail/' + this.goodsItem.iid);
-        
-      
-    this.$router.push({
-          path: '/detail',
-          query: {
-            iid: this.goodsItem.iid
-          }
-        })
-      
-      }
+  ```
+
++ 如何将服务器杂乱的信息处理为合理数据
+
+  ```javascript
+  // 面向一个类开发
+  export class Goods {
+    constructor(itemInfo, columns, service) {
+      this.desc = itemInfo.desc
+      this.price = itemInfo.price
+      this.oldPrice = itemInfo.oldPrice
+      this.discount = itemInfo.discount
+      this.columns = columns
+      this.service = service
     }
+  }
+  
+  ```
+
+  <img src="https://gitee.com/wang_hong_bin/repo-bin/raw/master/classGoods.png">
+
++ `scroll`使用注意点
+
+  ```css
+  包裹必须指定高度
   ```
 
   

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="nav-bar">
     <nav-bar>
       <div slot="left" class="back" @click="backClick"><img src="~assets/image/common/back.svg" alt=""> </div>
       <div slot="center" class="title">
@@ -57,5 +57,9 @@ export default {
   font-family: "Times New Roman", Times, serif;
   font-size: 40px;
   font-weight: bold;
+}
+.nav-bar {
+  position: relative;
+  z-index: 9;
 }
 </style>

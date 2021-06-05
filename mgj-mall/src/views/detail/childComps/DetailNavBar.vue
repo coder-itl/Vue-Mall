@@ -60,6 +60,7 @@ export default {
 }
 .nav-bar {
   position: relative;
-  z-index: 9;
+  z-index: 10;
+  background-color: #fff;
 }
 </style>

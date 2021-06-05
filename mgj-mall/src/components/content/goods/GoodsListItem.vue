@@ -71,8 +71,10 @@ export default {
       // 发射一个事件总线事件 itemImageLoad
       this.$bus.$emit('itemImageLoad');
     },
+    // 跳转详情图片 所以为 itemClick
     itemClick() {
       console.log('item image click'); // 详情页跳转
+      alert('aaas');
       this.$router.push('/detail/' + this.goodsItem.iid);
     }
   }

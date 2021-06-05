@@ -629,7 +629,6 @@
       + 原生的`js`监听图片:`img.onload = function(){}`
       + `Vue`中监听：`@load='方法'`
       
-      
   + 事件总线
   
     ```javascript
@@ -637,8 +636,11 @@
     
       Vue.protoType.$bus = new Vue()
     
+    ```
   ```
-    
+  
+  ```
+  
 + 防抖
 
      ```javascript
@@ -731,7 +733,45 @@
 
 
 
+###  MGJ-Mall Day-05
 
++ 疑问点
+
+  ```javascript
+  // axios 封装时如何使用 query 
+  
+  params --> query 如何改写? 
+  
+  import { request } from './request'
+  
+  axios:
+      export function getDetail(iid) {
+        return request({
+          url: '/detail',
+          params: {
+            iid,
+          },
+        })
+      }
+  
+  
+  itemClick() {
+        console.log('item image click'); // 详情页跳转
+        // this.$router.push('/detail/' + this.goodsItem.iid);
+        
+      
+    this.$router.push({
+          path: '/detail',
+          query: {
+            iid: this.goodsItem.iid
+          }
+        })
+      
+      }
+    }
+  ```
+
+  
 
 
 

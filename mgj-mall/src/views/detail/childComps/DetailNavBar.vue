@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav-bar>
-      <!--   <div slot="left" class="left"> &lt; </div> -->
+      <div slot="left" class="back" @click="backClick"><img src="~assets/image/common/back.svg" alt=""> </div>
       <div slot="center" class="title">
         <div v-for="(item,index) in titles" :key="index" :class="{active:index===currIndex}" class="title-item"
           @click="titleClick(index)">{{item}}
@@ -31,6 +31,11 @@ export default {
     titleClick(index) {
       // 获取详情页 选项卡点击事件
       this.currIndex = index;
+    },
+    // 返回按钮的点击事件
+    backClick() {
+      // 其他写法 go(-1)
+      this.$router.back();
     }
   }
 }
@@ -48,7 +53,7 @@ export default {
   color: pink;
 }
 
-.left {
+.back {
   font-family: "Times New Roman", Times, serif;
   font-size: 40px;
   font-weight: bold;

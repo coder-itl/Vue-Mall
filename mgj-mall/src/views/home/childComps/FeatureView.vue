@@ -14,5 +14,6 @@
 <script>
 export default {
   name: "FeatureView",
+  methods: {}
 }
 </script>

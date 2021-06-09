@@ -778,7 +778,20 @@
   包裹必须指定高度
   ```
 
++ `watch:{}`
+
+  ```javascript
+  // 目的: 获取图片个数
+  watch:{
+       detailInfo() {
+        	this.imageLength = this.detailInfo.detailImage[0].list.length; // 避免被调用多次
+      }
+  }
+  ```
+
   
+
+  <img src="https://gitee.com/wang_hong_bin/repo-bin/raw/master/watch.png">
 
 
 

@@ -64,10 +64,10 @@ const router = new VueRouter({
 })
 
 // 全局导航首位 实现跳转时更换 title 功能
-// router.beforeEach((to, from, next) => {
-//   document.title = to.matched[0].meta.title
-//   next()
-// })
+router.beforeEach((to, from, next) => {
+  document.title = to.matched[0].meta.title
+  next()
+})
 
 // 导出
 export default router

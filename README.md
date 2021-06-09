@@ -795,9 +795,34 @@
 
 
 
+###  MGJ-MallDay-06
 
++ 详情页联动
 
+  ```javascript
+  // NavBar 发射事件,Detail 接受事件,再根据 index 跳转到对应位置
+  titleClick(index) {
+      console.log('title index', index);
+      // 根据 index 跳转到对应位置
+      this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 500);
+  }
+  ```
 
++ `$nextTick()`
+
+  ```javascript
+  // 根据最新的数据 对应的 DOM 是已经被渲染出来
+  // 但是图片依然没有加载完
+  this.$nextTick(()=>{
+     		this.themeTopYs.push(0), // 商品offsetTop
+          this.themeTopYs.push(this.$refs.params[自定义名称].$el.offsetTop), //  参数offsetTop
+          this.themeTopYs.push(this.$refs.comment.$el.offsetTop), // 评论的 offsetTop
+          this.themeTopYs.push(this.$refs.recommend.$el.offsetTop), // 推荐offsetTop
+      
+  })
+  ```
+
+  
 
 
 

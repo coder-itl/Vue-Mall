@@ -31,6 +31,8 @@ export default {
     titleClick(index) {
       // 获取详情页 选项卡点击事件
       this.currIndex = index;
+      // 详情页 title 联动
+      this.$emit('titleClick', index);
     },
     // 返回按钮的点击事件
     backClick() {

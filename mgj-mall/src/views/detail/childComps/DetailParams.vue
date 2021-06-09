@@ -20,7 +20,6 @@
 
 <script>
 export default {
-  name: 'detailParams',
   props: {
     params: {
       type: Object,

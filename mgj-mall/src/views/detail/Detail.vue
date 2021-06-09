@@ -43,6 +43,7 @@ export default {
       // 1. 获取顶部的图片轮播数据
       const data = res.result;
       // console.log('iid: ', res);
+
       console.log('网络请求发送成功', res);
 
       // 2. 取出轮播图数据

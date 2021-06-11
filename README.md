@@ -813,9 +813,80 @@
   父子组件的参数名称问题[props]
   ```
 
++ 如何将`时间戳转换成时间格式化字符串`
+
+  ```javascript
+  时间戳: unix时间戳是从1970年1月1日（UTC/GMT的午夜）开始所经过的`秒数`，不考虑闰秒
+  ```
+
+  ```javascript
+  注意: 时间戳(单位: 秒) 
+  Eg: 123456(s)*1000 = 123456000 ms
+  
+  Date对象是 JavaScript 原生的时间库。它以1970年1月1日00:00:00作为时间的零点，可以表示的时间范围是前后各1亿天（单位为`毫秒`）。
+  
+  1. 将时间戳转换为 Date 对象
+  	const date = new Date()  // 单位: 'ms'
+  2. 将 date 进行格式化,转换成对应的字符串
+  	
+  	+ date.getYear() 年 ···月(getMonth)
+  
+  	+ format(date,'格式化类型[Eg. yyyy-MM-dd hh:mm:ss 2021-06-11 07:03 ]')
+  	
+  		date --> FormatString(常用)
+  
+  		y: year 年
+  		M: Month 月
+  		d: day 日
+  		h: hours 小时(h-12小时,H-24小时)
+  		m: minutes 分钟
+  		s: seconds 秒钟
+                              
+                              
+  
+  ```
+
++ 组件复用时引起的`eror`
+
+  ```javascript
+  computed: {
+      showImage() {
+         // 解决方案: 前面为原始获取 || 后面为新数据源获取
+        return this.goodsItem.image || this.goodsItem.show.img;
+      }
+    }
+  ```
+
++ `mixin[混入]`
+
+  ```javascript
+  // 使用原因 computed 代码冗余
+  Home.vue:
+  	computed(){
+          ...
+      }
+  
+  
+  Detail.vue:
+  	computed(){
+          ...
+      }
+  	
+  ```
+
++ 为什么要取消全局事件监听
+
+  ```bash
+  
+  ```
+
   
 
-###  MGJ-MallDay-06
+
+
+
+
+###  MGJ-MallDay-07
 
 + 详情页联动
 

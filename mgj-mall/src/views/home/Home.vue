@@ -4,7 +4,7 @@
     <!-- 底部导航: nav-bar -->
     <nav-bar class="home-nav">
       <div slot="center">
-        <a href="github:https://github.com/coder-itl">Vue-Mall</a>
+        <a href="https://github.com/coder-itl" class="aMgj">蘑菇街-Coder-Itl</a>
 
       </div>
     </nav-bar>
@@ -52,6 +52,9 @@ import BackTop from "components/content/backTop/BackTop"
 // 导入 Home.vue 面向的 home.js
 import { getHomeMultidata, getHomeGoods } from "network/home"
 
+import { itemListenerMinix } from "common/mixin"
+import { debouce } from "common/utils"
+
 export default {
   components: {
     NavBar,
@@ -63,6 +66,7 @@ export default {
     Scroll,
     BackTop
   },
+
   data() {
     return {
       banners: [], // 默认值为: []
@@ -81,6 +85,7 @@ export default {
       saveY: 0
     }
   },
+  mixins: [itemListenerMinix],
   // 生命周期函数: 组件创造后立刻进行首页数据请求
   created() {
     // 请求多个调用 可以使用 promise 是因为封装的时候 return instsnce属于promise，在这里获取结果就可以使用 then()
@@ -91,36 +96,14 @@ export default {
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
 
+    // 手动代码点击一次
+    this.homeTabClick(0);
 
   },
-  mounted() {
-    // 1. 图片加载完成的事件监听
-    const refresh = this.debounce(this.$refs.scroll.refresh, 500);
-    // 监听 item 中图片加载完成
-    this.$bus.$on('itemImageLoad', () => {
-      // 防抖
-      refresh();
-    });
 
-  },
   methods: {
-
-    /*
-    * 事件监听相关的方法
-    */
-    // 防抖函数
-    debounce(func, delay) {
-      let timer = null;
-      return function (...args) {
-        if (timer) clearTimeout(timer)
-        timer = setTimeout(() => {
-          func.apply(this, args)
-        }, delay)
-      }
-    },
-
     homeTabClick(index) {
-      console.log('$emit事件获取监听');
+      // console.log('$emit事件获取监听');
       console.log(index);
       switch (index) {
         case 0:
@@ -134,8 +117,10 @@ export default {
           break;
       }
       // 对两个 tabcontrol 进行统一
-      this.$refs.tabControll.currentIndex = index;
-      this.$refs.tabControl.currentIndex = index;
+      if (this.$refs.tabControll !== undefined) {
+        this.$refs.tabControll.currentIndex = index;
+        this.$refs.tabControl.currentIndex = index;
+      }
     },
     backClick() {
       // console.log('组件事件监听: 返回顶部按钮得到点击');
@@ -192,11 +177,18 @@ export default {
 
   activated() {
     // 0,y,time
-    this.$refs.scroll.scrollTo(0, this.saveY, 0);
-    this.$refs.scroll.refresh();
+    /*  this.$refs.scroll.scrollTo(0, this.saveY, 0);
+     this.$refs.scroll.refresh(); */
+    if (this.$refs.scroll) {
+      this.$refs.scroll.scrollTo(0, this.saveY, 0);
+      this.$refs.scroll.refresh();
+    }
   },
   deactivated() {
+    // 1. 保存 Y 值
     this.saveY = this.$refs.scroll.getScollY();
+    // 2. 取消全局事件监听 【TODO: 为什么要取消全局事件监听】
+    this.$bus.$off('itemImgLoad', this.itemImgListener)
   },
 
 
@@ -248,5 +240,14 @@ export default {
   bottom: 49px;
   left: 0;
   right: 0;
+}
+.aMgj {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+}
+
+.aMgj:hover {
+  color: palevioletred;
 }
 </style>

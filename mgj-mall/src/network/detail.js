@@ -22,10 +22,9 @@ export class Goods {
   }
 }
 
-export class GoodsParam {
-  constructor(info, rule) {
-    this.image = info.images ? info.images[0] : ''
-    this.infos = info.set
-    this.size = rule.tables
-  }
+// 获取评论
+export function getRecommend() {
+  return request({
+    url: '/recommend',
+  })
 }

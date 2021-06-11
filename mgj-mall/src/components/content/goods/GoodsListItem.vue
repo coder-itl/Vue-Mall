@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list-item" @click="itemClick">
-    <img v-lazy="goodsItem.show.img" alt="" @load="imageLoad">
+    <img v-lazy="showImage" alt="" @load="imageLoad">
     <!-- :src="goodsItem.show.img" -->
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
@@ -71,11 +71,29 @@ export default {
     imageLoad() {
       // 发射一个事件总线事件 itemImageLoad
       this.$bus.$emit('itemImageLoad');
+
+      /*
+        TODO: 优化事件 
+          方法一:  
+        if (this.$route.path.indexOf('/home')) {
+          this.$bus.$emit('homeItemImageLoad')
+        } else if (this.$route.path.indexOf('/detail')) {
+          this.$bus.$emit('detailItemImageLoad')
+        }
+      */
+
+
     },
     // 跳转详情图片 所以为 itemClick
     itemClick() {
       //  console.log('item image click'); 详情页跳转
       this.$router.push('/detail/' + this.goodsItem.iid);
+    }
+  },
+
+  computed: {
+    showImage() {
+      return this.goodsItem.image || this.goodsItem.show.img;
     }
   }
 }

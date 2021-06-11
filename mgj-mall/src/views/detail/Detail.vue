@@ -6,7 +6,9 @@
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shopInfo"></detail-shop-info>
       <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"></detail-goods-info>
-      <detail-params :goods-params="goodsParams"></detail-params>
+      <detail-params :goods-params="goodsParams" ref="params"></detail-params>
+      <detail-comment-info :comment-info="commentInfo" ref="comment"></detail-comment-info>
+      <goods-list :goods="recommends" ref="recommend"></goods-list>
     </scroll>
   </div>
 </template>
@@ -18,13 +20,16 @@ import DetailBaseInfo from "./childComps/DetailBaseInfo"
 import DetailShopInfo from "./childComps/DetailShopInfo"
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo"
 import DetailParams from "./childComps/DetailParams"
+import DetailCommentInfo from './childComps/DetailCommentInfo'
 
 import Scroll from "components/common/scroll/Scroll"
+import GoodsList from "components/content/goods/GoodsList"
 
-import { getDetail, Goods } from "network/detail"
+import { getDetail, Goods, getRecommend } from "network/detail"
 
-// TODO: 封装的 js 文件不会使用了
-// import { debouce } from "@/common/utils"
+import { debouce } from "common/utils"
+import { itemListenerMinix } from "common/mixin"
+
 
 export default {
   data() {
@@ -37,8 +42,12 @@ export default {
       themeTopYs: [],
       getThemeTopY: null,
       goodsParams: {},
+      commentInfo: {},
+      recommends: []
     }
   },
+  // 混入初次使用
+  mixins: [itemListenerMinix],
   components: {
     DetailNavBar,
     DetailSwiper,
@@ -46,19 +55,19 @@ export default {
     DetailShopInfo,
     DetailGoodsInfo,
     DetailParams,
+    DetailCommentInfo,
+    GoodsList,
     Scroll
   },
   created() {
     // 1. 保存传入的 iid
     this.iid = this.$route.params.iid;
 
-    // 2. 根据 iid 请求对应数据展示
+    // 2. 请求详情数据
     getDetail(this.iid).then((res) => {
       // 1. 获取顶部的图片轮播数据
       const data = res.result;
-      // console.log('iid: ', res);
-
-      console.log('网络请求发送成功', res);
+      console.log('数据信息: ', data);
 
       // 2. 取出轮播图数据
       this.topImages = res.result.itemInfo.topImages;
@@ -75,18 +84,47 @@ export default {
       // 6. 获取参数的值
       this.goodsParams = data.itemParams;
 
-    })
+      // 7. 取出评论的信息 【有的存在评论信息，有的不存在评论信息 进行判断过滤】 data.rate.cRate != 0 即为存在数据
+      if (data.rate.cRate !== 0) {
+        this.commentInfo = data.rate.list[0];
+        console.log('commentInfo data: ', this.commentInfo);
+      }
+
+
+
+
+    });
+
+    // 3. 请求推荐数据
+    getRecommend().then((res) => {
+      console.log('请求推荐数据: ', res);
+      this.recommends = res.data.list;
+    });
+
+    // 4. 给 getThemeTopY 赋值
+    this.getThemeTopY = debouce(() => {
+      this.themeTopYs.push(0), // 商品offsetTop
+        this.themeTopYs.push(this.$refs.params.$el.offsetTop), //  参数offsetTop
+        this.themeTopYs.push(this.$refs.comment.$el.offsetTop), // 评论的 offsetTop
+        this.themeTopYs.push(this.$refs.recommend.$el.offsetTop) // 推荐offsetTop
+    });
+
+
   },
   methods: {
     imageLoad() {
       this.$refs.scroll.refresh();
+      // 根据 index 跳转到对应位置
+      this.getThemeTopY();
     },
     titleClick(index) {
       console.log('title index', index);
-      // 根据 index 跳转到对应位置
+      this.$refs.scroll.scrollTo(0, -this.themeTopYs[index]);
     }
   },
-
+  destroyed() {
+    this.$bus.$off('itemImgLoad', this.itemImgListener)
+  }
 }
 </script>
 

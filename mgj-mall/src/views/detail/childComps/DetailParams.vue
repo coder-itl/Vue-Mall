@@ -1,17 +1,17 @@
 <template>
-  <div class="detail-params" v-if="Object.keys(params).length !== 0">
-    <div class="ruler">
-      <table>
-        <tr v-for="items in params.rule.tables[0]" :key="items">
-          <td v-for="item in items" :key="item">{{item}}</td>
+  <div class="goods-params" v-if="Object.keys(goodsParams).length">
+    <div class="rules">
+      <table v-if="goodsParams.rule && goodsParams.rule.tables.length">
+        <tr v-for="(tr, index) in goodsParams.rule.tables[0]" :key="index">
+          <td v-for="(td,index) in tr" :key="index">{{td}}</td>
         </tr>
       </table>
     </div>
-    <div class="info">
+    <div class="params" v-if="Object.keys(goodsParams.info).length && goodsParams.info.set.length">
       <table>
-        <tr v-for="info in params.info.set" :key="info">
-          <td class="info-key">{{info.key}}</td>
-          <td class="info-value">{{info.value}}</td>
+        <tr v-for="(info, index) in goodsParams.info.set" :key="index">
+          <td class="key">{{info.key}}</td>
+          <td class="value">{{info.value}}</td>
         </tr>
       </table>
     </div>
@@ -20,11 +20,12 @@
 
 <script>
 export default {
+  name: 'DetailParams',
   props: {
-    params: {
+    goodsParams: {
       type: Object,
       default() {
-        return {}
+        return {};
       }
     }
   }
@@ -32,41 +33,27 @@ export default {
 </script>
 
 <style scoped>
-.detail-params {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-bottom: 5px solid #eee;
-}
-.ruler table {
+.goods-params {
   width: 100%;
-  text-align: center;
-  border-collapse: collapse;
-  font-size: 14px;
+  padding: 8px 8px 20px;
+  border-bottom: solid 4px rgba(100, 100, 100, 0.1);
 }
-.ruler table tr {
-  height: 38px;
-}
-.ruler table tr td {
-  border-bottom: 1px solid rgb(204, 195, 195);
-}
-.info {
-  border-top: 1px solid rgb(88, 86, 86);
-  padding-top: 15px;
-}
-.info table {
+.rules table {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 16px;
 }
-.info table tr td {
-  height: 30px;
-  border-bottom: 1px solid rgb(204, 195, 195);
+.rules table tr td,
+.params table tr td {
+  padding: 8px 16px;
+  border-bottom: 1px solid rgba(100, 100, 100, 0.1);
 }
-.info-key {
-  width: 90px;
-  text-align: center;
+.params table {
+  width: 100%;
 }
-.info-value {
-  color: rgb(228, 25, 25);
+.params table tr .key {
+  width: 30%;
+}
+.params table tr .value {
+  width: 70%;
+  color: deeppink;
 }
 </style>

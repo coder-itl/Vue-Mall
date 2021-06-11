@@ -6,7 +6,7 @@
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shopInfo"></detail-shop-info>
       <detail-goods-info :detail-info="detailInfo" @imageLoad="imageLoad"></detail-goods-info>
-      <!-- <detail-params :params="params" ref="params"></detail-params> -->
+      <detail-params :goods-params="goodsParams"></detail-params>
     </scroll>
   </div>
 </template>
@@ -17,13 +17,14 @@ import DetailSwiper from "./childComps/DetailSwiper"
 import DetailBaseInfo from "./childComps/DetailBaseInfo"
 import DetailShopInfo from "./childComps/DetailShopInfo"
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo"
-// import DetailParams from "./childComps/DetailParams"
+import DetailParams from "./childComps/DetailParams"
 
 import Scroll from "components/common/scroll/Scroll"
 
-import { getDetail, Goods, GoodsParam } from "network/detail"
+import { getDetail, Goods } from "network/detail"
 
-import debouce from "common/utils"
+// TODO: 封装的 js 文件不会使用了
+// import { debouce } from "@/common/utils"
 
 export default {
   data() {
@@ -34,9 +35,18 @@ export default {
       shopInfo: {},
       detailInfo: {},
       themeTopYs: [],
-      getThemeTopY: null
-      // params: {},
+      getThemeTopY: null,
+      goodsParams: {},
     }
+  },
+  components: {
+    DetailNavBar,
+    DetailSwiper,
+    DetailBaseInfo,
+    DetailShopInfo,
+    DetailGoodsInfo,
+    DetailParams,
+    Scroll
   },
   created() {
     // 1. 保存传入的 iid
@@ -61,43 +71,22 @@ export default {
 
       // 5. 保存商品的详情数据
       this.detailInfo = data.detailInfo;
-      // 获取参数的值
-      this.params = new GoodsParam(data.itemParams.info, data.itemParams.rule);
 
-      // 赋值
-      this.getThemeTopY = debouce(() => {
-        this.themeTopYs = [];
-        this.themeTopYs.push(0) // 商品offsetTop
-        // this.themeTopYs.push(this.$refs.params.$el.offsetTop), //  参数offsetTop
-        // this.themeTopYs.push(this.$refs.comment.$el.offsetTop), // 评论的 offsetTop
-        // this.themeTopYs.push(this.$refs.recommend.$el.offsetTop) // 推荐offsetTop
-        console.log('--------防抖函数已经调用-------');
-      }, 100);
-
+      // 6. 获取参数的值
+      this.goodsParams = data.itemParams;
 
     })
   },
   methods: {
     imageLoad() {
       this.$refs.scroll.refresh();
-      console.log('图片加载中············');
-      this.getThemeTopY();
     },
     titleClick(index) {
       console.log('title index', index);
       // 根据 index 跳转到对应位置
-      this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 500);
     }
   },
-  components: {
-    DetailNavBar,
-    DetailSwiper,
-    DetailBaseInfo,
-    DetailShopInfo,
-    DetailGoodsInfo,
-    // DetailParams,
-    Scroll
-  },
+
 }
 </script>
 

@@ -795,6 +795,26 @@
 
 
 
+
+
+### MGJ-MallDay-06
+
++ 实现参数数据请求展示
+
+  ```javascript
+  1. 放弃类的构建,直接请求 itemParams 对象
+  2. 父组件初始化属性
+  3. 子组件 props 传递
+  ```
+
++ 疑问点
+
+  ```javascript
+  父子组件的参数名称问题[props]
+  ```
+
+  
+
 ###  MGJ-MallDay-06
 
 + 详情页联动
@@ -821,6 +841,96 @@
       
   })
   ```
+
++ `vue-lazyload`懒加载
+
+  + 文档地址
+
+    ```bash
+    https://github.com/hilongjw/vue-lazyload
+    ```
+
+  + 安装
+
+    ```bash
+    npm install vue-lazyload --save
+    ```
+
+  + 基础使用
+
+    ```javascript
+    // 1. 下载
+    // 2. 导入
+    import VueLazyLoad from "vue-lazyload"
+    
+    // 3. 安装
+    Vue.use(VueLazyLoad,options)
+    
+    options:{
+        loading: ''; // 1. 网络图片资源可以直接填写地址 2. 本地资源通过 require('file-path'); 图片懒加载占位图
+    }
+    // 4. 在使用图片的地方将 :src="" 替换
+    <img v-lazy="数据源">
+    ```
+
+  + `px2ww-css`单位转换
+
+    ```bash
+    npm install postcss-px-to-viewport --sve--dev
+    ```
+
+    + 根目录添加文件`postcss.config.js`
+
+      ```javascript
+      module.exports = {
+        plugins: {
+          autoprefixer: {},
+          'postcss-px-to-viewport': {
+            viewportWidth: 375, // 视窗的宽度
+            viewportHeight: 667, //视窗的高度
+            viewportUnit: 'vw', // 指定需要转换成的视窗单位,建议使用 vw
+            unitPrecision: 5, //指定 ‘px’ 转换为视窗单位值的小委属(很多时候无法整除)
+            selectortBlackList: ['ignore', 'tab-bar', 'tab-bar0item'], // 指定不需要转换的类
+            minPixelValue: 1, //小于或等于 '1px' 不转换为视窗单位
+            mediaQuery: false, //允许在媒体查询中转换 'px'
+          },
+        },
+      }
+      
+      ```
+
+  + 项目部署
+
+    + `windows`部署
+
+      ```bash
+      # 命令行启动nginx产生如下错误:
+      	
+      	nginx: [emerg] bind() to 0.0.0.0:80 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
+      
+      
+      # 解决方案
+      server {
+          listen       8070; # D:\Nginx\conf [修改 nginx.conf文件的端口号]
+          ...
+      }
+      
+      
+      
+      # 成功:
+      
+      	Welcome to nginx!
+          If you see this page, the nginx web server is successfully installed and working. Further configuration is required.
+      
+          For online documentation and support please refer to nginx.org.
+          Commercial support is available at nginx.com.
+      
+          Thank you for using nginx.
+      ```
+
+      
+
+    + `Linux`部署
 
   
 

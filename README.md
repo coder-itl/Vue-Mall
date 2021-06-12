@@ -775,18 +775,18 @@
 + `scroll`使用注意点
 
   ```css
-  包裹必须指定高度
+	包裹必须指定高度
   ```
 
 + `watch:{}`
 
   ```javascript
-  // 目的: 获取图片个数
-  watch:{
-       detailInfo() {
-        	this.imageLength = this.detailInfo.detailImage[0].list.length; // 避免被调用多次
-      }
-  }
+	  // 目的: 获取图片个数
+	  watch:{
+		   detailInfo() {
+				this.imageLength = this.detailInfo.detailImage[0].list.length; // 避免被调用多次
+		  }
+	  }
   ```
 
   
@@ -802,75 +802,75 @@
 + 实现参数数据请求展示
 
   ```javascript
-  1. 放弃类的构建,直接请求 itemParams 对象
-  2. 父组件初始化属性
-  3. 子组件 props 传递
+	  1. 放弃类的构建,直接请求 itemParams 对象
+	  2. 父组件初始化属性
+	  3. 子组件 props 传递
   ```
 
 + 疑问点
 
   ```javascript
-  父子组件的参数名称问题[props]
+	父子组件的参数名称问题[props]
   ```
 
 + 如何将`时间戳转换成时间格式化字符串`
 
   ```javascript
-  时间戳: unix时间戳是从1970年1月1日（UTC/GMT的午夜）开始所经过的`秒数`，不考虑闰秒
+	时间戳: unix时间戳是从1970年1月1日（UTC/GMT的午夜）开始所经过的`秒数`，不考虑闰秒
   ```
 
   ```javascript
-  注意: 时间戳(单位: 秒) 
-  Eg: 123456(s)*1000 = 123456000 ms
-  
-  Date对象是 JavaScript 原生的时间库。它以1970年1月1日00:00:00作为时间的零点，可以表示的时间范围是前后各1亿天（单位为`毫秒`）。
-  
-  1. 将时间戳转换为 Date 对象
-  	const date = new Date()  // 单位: 'ms'
-  2. 将 date 进行格式化,转换成对应的字符串
-  	
-  	+ date.getYear() 年 ···月(getMonth)
-  
-  	+ format(date,'格式化类型[Eg. yyyy-MM-dd hh:mm:ss 2021-06-11 07:03 ]')
-  	
-  		date --> FormatString(常用)
-  
-  		y: year 年
-  		M: Month 月
-  		d: day 日
-  		h: hours 小时(h-12小时,H-24小时)
-  		m: minutes 分钟
-  		s: seconds 秒钟
-                              
-                              
+	  注意: 时间戳(单位: 秒) 
+	  Eg: 123456(s)*1000 = 123456000 ms
+	  
+	  Date对象是 JavaScript 原生的时间库。它以1970年1月1日00:00:00作为时间的零点，可以表示的时间范围是前后各1亿天（单位为`毫秒`）。
+	  
+	  1. 将时间戳转换为 Date 对象
+		const date = new Date()  // 单位: 'ms'
+	  2. 将 date 进行格式化,转换成对应的字符串
+		
+		+ date.getYear() 年 ···月(getMonth)
+	  
+		+ format(date,'格式化类型[Eg. yyyy-MM-dd hh:mm:ss 2021-06-11 07:03 ]')
+		
+			date --> FormatString(常用)
+	  
+			y: year 年
+			M: Month 月
+			d: day 日
+			h: hours 小时(h-12小时,H-24小时)
+			m: minutes 分钟
+			s: seconds 秒钟
+								  
+								  
   
   ```
 
 + 组件复用时引起的`eror`
 
   ```javascript
-  computed: {
-      showImage() {
-         // 解决方案: 前面为原始获取 || 后面为新数据源获取
-        return this.goodsItem.image || this.goodsItem.show.img;
-      }
-    }
+	  computed: {
+		  showImage() {
+			 // 解决方案: 前面为原始获取 || 后面为新数据源获取
+			return this.goodsItem.image || this.goodsItem.show.img;
+		  }
+		}
   ```
 
 + `mixin[混入]`
 
   ```javascript
-  // 使用原因 computed 代码冗余
-  Home.vue:
-  	computed(){
-          ...
-      }
-  
-  
-  Detail.vue:
-  	computed(){
-          ...
-      }
+	  // 使用原因 computed 代码冗余
+	  Home.vue:
+		computed(){
+			  ...
+		  }
+	  
+	  
+	  Detail.vue:
+		computed(){
+			  ...
+		  }
   	
   ```
 
@@ -891,50 +891,50 @@
 + 详情页联动
 
   ```javascript
-  // NavBar 发射事件,Detail 接受事件,再根据 index 跳转到对应位置
-  titleClick(index) {
-      console.log('title index', index);
-      // 根据 index 跳转到对应位置
-      this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 500);
-  }
+	  // NavBar 发射事件,Detail 接受事件,再根据 index 跳转到对应位置
+	  titleClick(index) {
+		  console.log('title index', index);
+		  // 根据 index 跳转到对应位置
+		  this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 500);
+	  }
   ```
 
 + `$nextTick()`
 
   ```javascript
-  // 根据最新的数据 对应的 DOM 是已经被渲染出来
-  // 但是图片依然没有加载完
-  this.$nextTick(()=>{
-     		this.themeTopYs.push(0), // 商品offsetTop
-          this.themeTopYs.push(this.$refs.params[自定义名称].$el.offsetTop), //  参数offsetTop
-          this.themeTopYs.push(this.$refs.comment.$el.offsetTop), // 评论的 offsetTop
-          this.themeTopYs.push(this.$refs.recommend.$el.offsetTop), // 推荐offsetTop
-      
-  })
+	  // 根据最新的数据 对应的 DOM 是已经被渲染出来
+	  // 但是图片依然没有加载完
+	  this.$nextTick(()=>{
+				this.themeTopYs.push(0), // 商品offsetTop
+			  this.themeTopYs.push(this.$refs.params[自定义名称].$el.offsetTop), //  参数offsetTop
+			  this.themeTopYs.push(this.$refs.comment.$el.offsetTop), // 评论的 offsetTop
+			  this.themeTopYs.push(this.$refs.recommend.$el.offsetTop), // 推荐offsetTop
+		  
+	  })
   ```
 
 + 顶部导航滚动
 
   ```javascript
-  contentScroll(position) {
-        let positionY = -position.y;
-        let length = this.themeTopYs.length;
-        //hack做法，
-      for (let i = 0; i < length; i++) {
-          if (this.currentIndex !== i && positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1]) {
-          this.currentIndex = i;
-            this.$refs.nav.currIndex = this.currentIndex;
-          }
-        }
-      // 是否显示backTop图标
-        this.isShowBackTop = Math.abs(position.y) > 1000;
-    }
+	  contentScroll(position) {
+			let positionY = -position.y;
+			let length = this.themeTopYs.length;
+			//hack做法，
+		  for (let i = 0; i < length; i++) {
+			  if (this.currentIndex !== i && positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1]) {
+			  this.currentIndex = i;
+				this.$refs.nav.currIndex = this.currentIndex;
+			  }
+			}
+		  // 是否显示backTop图标
+			this.isShowBackTop = Math.abs(position.y) > 1000;
+		}
   ```
 
 + `bug position:fixed`
 
   ```css
-position:fixed // 未生效
+		position:fixed // 未生效
   ```
   
 + `VueX[购物车数据]`使用
@@ -942,59 +942,59 @@ position:fixed // 未生效
   + 安装
 
     ```bash
-    npm install vuex --save
+		npm install vuex --save
     ```
 
   + 在根目录新建`store`文件夹
 
     ```bash
-    mkdir store
-    touch ./store/index.js
+		mkdir store
+		touch ./store/index.js
     ```
 
   + `index.js`基本内容
 
     ```javascript
-    import Vue from 'vue'
-    import Vuex from 'vuex'
-    
-    Vue.use(Vuex)
-    
-    const store = new Vuex.Store({
-      // state: 状态管理
-      state: {
-       // 定义状态
-      },
-      // mutations: 修改 state 数据
-      mutations: {
-      	  ...
-      },
-      actions: {
-          ...
-      },
-      getters: {
-          ...
-      },
-      modules: {
-          ...
-      },
-    })
-    
-    // 导出 store 独享
-    export default store
+		import Vue from 'vue'
+		import Vuex from 'vuex'
+		
+		Vue.use(Vuex)
+		
+		const store = new Vuex.Store({
+		  // state: 状态管理
+		  state: {
+		   // 定义状态
+		  },
+		  // mutations: 修改 state 数据
+		  mutations: {
+			  ...
+		  },
+		  actions: {
+			  ...
+		  },
+		  getters: {
+			  ...
+		  },
+		  modules: {
+			  ...
+		  },
+		})
+		
+		// 导出 store 独享
+		export default store
     ```
 
   + 挂在元素
 
     ```javascript
-    main.js:
-    	import store from './store'
-    
-        new Vue({
-          render: (h) => h(App),
-          router, // 挂载路由
-          store, // 挂载 store
-        }).$mount('#app')
+		main.js:
+			import store from './store'
+		
+			new Vue({
+			  render: (h) => h(App),
+			  router, // 挂载路由
+			  store, // 挂载 store
+			}).$mount('#app')
     
     ```
 
@@ -1002,11 +1002,11 @@ position:fixed // 未生效
 
     ```javascript
     
-     mutations 唯一的目的就是修改state中状态
-    
-     mutations 中的每个方法尽可能完成的事比较单 一 一 点
-    
-     Eg. actions  -> mulations
+		 mutations 唯一的目的就是修改state中状态
+		
+		 mutations 中的每个方法尽可能完成的事比较单 一 一 点
+		
+		 Eg. actions  -> mulations
     
     ```
 
@@ -1015,8 +1015,8 @@ position:fixed // 未生效
     > + `action`
     >
     >   ```javascript
-    >   // 使用
-    >   this.$store.dispatch('addCart', product);
+		>   // 使用
+		>   this.$store.dispatch('addCart', product);
     >   
     >   ```
 
@@ -1031,55 +1031,55 @@ position:fixed // 未生效
   + 文档地址
 
     ```bash
-    https://github.com/hilongjw/vue-lazyload
+		https://github.com/hilongjw/vue-lazyload
     ```
 
   + 安装
 
     ```bash
-    npm install vue-lazyload --save
+		npm install vue-lazyload --save
     ```
 
   + 基础使用
 
     ```javascript
-    // 1. 下载
-    // 2. 导入
-    import VueLazyLoad from "vue-lazyload"
-    
-    // 3. 安装
-    Vue.use(VueLazyLoad,options)
-    
-    options:{
-        loading: ''; // 1. 网络图片资源可以直接填写地址 2. 本地资源通过 require('file-path'); 图片懒加载占位图
-    }
-    // 4. 在使用图片的地方将 :src="" 替换
-    <img v-lazy="数据源">
+		// 1. 下载
+		// 2. 导入
+		import VueLazyLoad from "vue-lazyload"
+		
+		// 3. 安装
+		Vue.use(VueLazyLoad,options)
+		
+		options:{
+			loading: ''; // 1. 网络图片资源可以直接填写地址 2. 本地资源通过 require('file-path'); 图片懒加载占位图
+		}
+		// 4. 在使用图片的地方将 :src="" 替换
+		<img v-lazy="数据源">
     ```
 
   + `px2ww-css`单位转换
 
     ```bash
-    npm install postcss-px-to-viewport --sve--dev
+		npm install postcss-px-to-viewport --sve--dev
     ```
 
     + 根目录添加文件`postcss.config.js`
 
       ```javascript
-      module.exports = {
-        plugins: {
-          autoprefixer: {},
-          'postcss-px-to-viewport': {
-            viewportWidth: 375, // 视窗的宽度
-            viewportHeight: 667, //视窗的高度
-            viewportUnit: 'vw', // 指定需要转换成的视窗单位,建议使用 vw
-            unitPrecision: 5, //指定 ‘px’ 转换为视窗单位值的小委属(很多时候无法整除)
-            selectortBlackList: ['ignore', 'tab-bar', 'tab-bar0item'], // 指定不需要转换的类
-            minPixelValue: 1, //小于或等于 '1px' 不转换为视窗单位
-            mediaQuery: false, //允许在媒体查询中转换 'px'
-          },
-        },
-      }
+		  module.exports = {
+			plugins: {
+			  autoprefixer: {},
+			  'postcss-px-to-viewport': {
+				viewportWidth: 375, // 视窗的宽度
+				viewportHeight: 667, //视窗的高度
+				viewportUnit: 'vw', // 指定需要转换成的视窗单位,建议使用 vw
+				unitPrecision: 5, //指定 ‘px’ 转换为视窗单位值的小委属(很多时候无法整除)
+				selectortBlackList: ['ignore', 'tab-bar', 'tab-bar0item'], // 指定不需要转换的类
+				minPixelValue: 1, //小于或等于 '1px' 不转换为视窗单位
+				mediaQuery: false, //允许在媒体查询中转换 'px'
+			  },
+			},
+		  }
       
       ```
 

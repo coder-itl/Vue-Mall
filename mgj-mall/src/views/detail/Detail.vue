@@ -10,6 +10,9 @@
       <detail-comment-info :comment-info="commentInfo" ref="comment"></detail-comment-info>
       <goods-list :goods="recommends" ref="recommend"></goods-list>
     </scroll>
+
+    <detail-bottom-bar @addCart="addToCart"></detail-bottom-bar>
+    <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   </div>
 </template>
 
@@ -21,6 +24,7 @@ import DetailShopInfo from "./childComps/DetailShopInfo"
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo"
 import DetailParams from "./childComps/DetailParams"
 import DetailCommentInfo from './childComps/DetailCommentInfo'
+import DetailBottomBar from './childComps/DetailBottomBar'
 
 import Scroll from "components/common/scroll/Scroll"
 import GoodsList from "components/content/goods/GoodsList"
@@ -28,7 +32,7 @@ import GoodsList from "components/content/goods/GoodsList"
 import { getDetail, Goods, getRecommend } from "network/detail"
 
 import { debouce } from "common/utils"
-import { itemListenerMinix } from "common/mixin"
+import { itemListenerMinix, backTopMixin } from "common/mixin"
 
 
 export default {
@@ -44,12 +48,11 @@ export default {
       goodsParams: {},
       commentInfo: {},
       recommends: [],
-      currentIndex: 0,
-      isShowBackTop: false
+      currentIndex: 0
     }
   },
   // 混入初次使用
-  mixins: [itemListenerMinix],
+  mixins: [itemListenerMinix, backTopMixin],
   components: {
     DetailNavBar,
     DetailSwiper,
@@ -59,6 +62,7 @@ export default {
     DetailParams,
     DetailCommentInfo,
     GoodsList,
+    DetailBottomBar,
     Scroll
   },
   created() {
@@ -125,7 +129,6 @@ export default {
       // 使用 scrollTo(实现滚动)
       this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 500);
     },
-
     // 监听滚动
     contentScroll(position) {
       let positionY = -position.y;
@@ -138,8 +141,22 @@ export default {
         }
       }
       // 是否显示backTop图标
-      this.isShowBackTop = Math.abs(position.y) > 1000;
+      this.isShowBackTop = positionY > 1000;
+    },
+    // 点击加入购物车
+    addToCart() {
+      // console.log('接收到子组件发送的自定义事件');
+      // 1. 获取购物车需要展示的信息
+      const product = {};
+      product.image = this.topImages[0];
+      product.title = this.goods.title;
+      product.desc = this.goods.desc;
+      product.price = this.goods.realPrice;
+      product.iid = this.iid;
+      // 2. 将商品添加到购物车里
+      this.$store.dispatch('addCart', product);
     }
+
   },
   destroyed() {
     this.$bus.$off('itemImgLoad', this.itemImgListener)

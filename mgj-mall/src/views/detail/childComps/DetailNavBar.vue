@@ -61,8 +61,12 @@ export default {
   font-weight: bold;
 }
 .nav-bar {
-  position: relative;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
   z-index: 10;
+
   background-color: #fff;
 }
 </style>

@@ -931,8 +931,102 @@ contentScroll(position) {
     }
   ```
   
++ `bug position:fixed`
+
+  ```css
   
+  position:fixed // 未生效
   
+  ```
+
++ `VueX[购物车数据]`使用
+
+  + 安装
+
+    ```bash
+    npm install vuex --save
+    ```
+
+  + 在根目录新建`store`文件夹
+
+    ```bash
+    mkdir store
+    touch ./store/index.js
+    ```
+
+  + `index.js`基本内容
+
+    ```javascript
+    import Vue from 'vue'
+    import Vuex from 'vuex'
+    
+    Vue.use(Vuex)
+    
+    const store = new Vuex.Store({
+      // state: 状态管理
+      state: {
+       // 定义状态
+      },
+      // mutations: 修改 state 数据
+      mutations: {
+      	  ...
+      },
+      actions: {
+          ...
+      },
+      getters: {
+          ...
+      },
+      modules: {
+          ...
+      },
+    })
+    
+    // 导出 store 独享
+    export default store
+    
+    ```
+
+  + 挂载元素
+
+    ```javascript
+    main.js:
+    	import store from './store'
+    
+        new Vue({
+          render: (h) => h(App),
+          router, // 挂载路由
+          store, // 挂载 store
+        }).$mount('#app')
+    
+    ```
+
+  + `mutations`
+
+    > ```javascript
+    > 
+    > mutations 唯一的目的就是修改state中状态
+    > 
+    > mutations 中的每个方法尽可能完成的事比较单 一 一 点
+    > 
+    > Eg. actions  -> mulations
+    > 
+    > ```
+    >
+    > 
+    >
+    > <img src="https://vuex.vuejs.org/vuex.png">
+    >
+    > + `action`
+    >
+    >   ```javascript
+    >   // 使用
+    >   this.$store.dispatch('addCart', product);
+    >   
+    >   ```
+    >
+    >   
+
 + `vue-lazyload`懒加载
 
   + 文档地址

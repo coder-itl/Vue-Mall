@@ -1,11 +1,9 @@
 <template>
   <div id="home">
-    <router-view></router-view>
     <!-- 底部导航: nav-bar -->
     <nav-bar class="home-nav">
       <div slot="center">
         <a href="https://github.com/coder-itl" class="aMgj">蘑菇街-Coder-Itl</a>
-
       </div>
     </nav-bar>
 
@@ -30,6 +28,7 @@
       <tab-control :titles="['流行', '新款', '精选']" @tabClick="homeTabClick" ref="tabControl">
       </tab-control>
       <goods-list :goods="showGoods"></goods-list>
+      <router-view></router-view>
     </scroll>
     <!-- BackTop 组件 -->
     <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
@@ -47,13 +46,11 @@ import FeatureView from "./childComps/FeatureView"
 import TabControl from "components/content/tabControl/TabControl"
 import GoodsList from "components/content/goods/GoodsList"
 import Scroll from "components/common/scroll/Scroll"
-import BackTop from "components/content/backTop/BackTop"
 
 // 导入 Home.vue 面向的 home.js
 import { getHomeMultidata, getHomeGoods } from "network/home"
 
-import { itemListenerMinix } from "common/mixin"
-import { debouce } from "common/utils"
+import { itemListenerMinix, backTopMixin } from "common/mixin"
 
 export default {
   components: {
@@ -63,8 +60,7 @@ export default {
     FeatureView,
     TabControl,
     GoodsList,
-    Scroll,
-    BackTop
+    Scroll
   },
 
   data() {
@@ -85,7 +81,7 @@ export default {
       saveY: 0
     }
   },
-  mixins: [itemListenerMinix],
+  mixins: [itemListenerMinix, backTopMixin],
   // 生命周期函数: 组件创造后立刻进行首页数据请求
   created() {
     // 请求多个调用 可以使用 promise 是因为封装的时候 return instsnce属于promise，在这里获取结果就可以使用 then()
@@ -122,12 +118,7 @@ export default {
         this.$refs.tabControl.currentIndex = index;
       }
     },
-    backClick() {
-      // console.log('组件事件监听: 返回顶部按钮得到点击');
-      // this.$refs.scroll[ref属性scroll].scroll[data变量scroll].scrollTo(0, 0, 500) [ (x,y,time) ]
-      // this.$refs.scroll.scroll.scrollTo(0, 0, 500) 在组件内部进行方法封装
-      this.$refs.scroll.scrollTo(0, 0, 500)
-    },
+
     // scroll 输出封装
     contentScroll(position) {
       // console.log(position);
@@ -208,27 +199,17 @@ export default {
 
 <style scoped>
 #home {
-  /* padding-top: 44px; */
   position: relative;
   height: 100vh;
 }
 .home-nav {
   color: #fff;
   background-color: pink;
-  /* 固定顶部导航 */
-  /*   position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 9; */
 }
 /* update: 吸顶问题  */
 .tab-control {
-  /*   position: sticky;
-  top: 44px;
-  z-index: 9; */
   position: relative;
-  z-index: 10;
+  z-index: 9;
 }
 
 .content {

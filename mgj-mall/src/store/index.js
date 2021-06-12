@@ -1,23 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import mutations from './mutations'
+import actions from './actions'
+
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   // state: 状态管理
   state: {
-    counter: 1000,
+    cartList: [],
   },
   // mutations: 修改 state 数据
-  mutations: {
-    increment(state) {
-      state.counter++
-    },
-    decrement(state) {
-      state.counter--
-    },
-  },
-  actions: {},
+  mutations,
+  actions,
   getters: {},
   modules: {},
 })

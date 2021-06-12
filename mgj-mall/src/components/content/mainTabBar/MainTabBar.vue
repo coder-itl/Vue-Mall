@@ -1,5 +1,5 @@
 <template>
-  <tab-bar>
+  <tab-bar class="tab-bar">
     <tab-bar-item path="/home">
       <img src="~assets/image/tabbar/shouye.png" alt="" slot="item-icon">
       <img src="~assets/image/tabbar/alive-shouye.png" alt="" slot="item-active-icon">
@@ -34,3 +34,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.tab-bar {
+  position: relative;
+  z-index: 1;
+}
+</style>

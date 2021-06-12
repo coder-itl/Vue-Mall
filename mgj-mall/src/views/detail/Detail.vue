@@ -96,10 +96,6 @@ export default {
         this.commentInfo = data.rate.list[0];
         // console.log('commentInfo data: ', this.commentInfo);
       }
-
-
-
-
     });
 
     // 3. 请求推荐数据

@@ -93,7 +93,7 @@ export default {
     this.getHomeGoods('sell')
 
     // 手动代码点击一次
-    this.homeTabClick(0);
+    // this.homeTabClick(0);
 
   },
 

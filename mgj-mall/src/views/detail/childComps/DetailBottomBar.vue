@@ -38,19 +38,16 @@ export default {
 <style scoped>
 .bottom-bar {
   position: fixed;
-  margin-top: 0;
-  padding: 0;
 
   left: 0;
   right: 0;
   bottom: 0;
 
-  height: 58px;
+  height: 49px;
   width: 100%;
 
   display: flex;
   background-color: #fff;
-  z-index: 1000;
 
   box-shadow: 0 0 1px gray;
 }

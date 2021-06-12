@@ -1,5 +1,5 @@
 <template>
-  <div class="cart">
+  <div id="cart">
     <nav-bar class="nav-bar">
       <div slot="center" class="center">购物车({{count}})</div>
     </nav-bar>
@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import NavBar from '../../components/common/navbar/NavBar.vue'
+import NavBar from 'components/common/navbar/NavBar.vue'
 
 export default {
   name: 'Cart',
@@ -21,7 +21,7 @@ export default {
   }
 }
 
-NavBar</script>
+</script>
 
 <style  scoped>
 .nav-bar {

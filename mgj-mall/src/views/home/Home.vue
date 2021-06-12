@@ -99,7 +99,7 @@ export default {
 
   methods: {
     homeTabClick(index) {
-      console.log(index);
+      // console.log(index);
       switch (index) {
         case 0:
           this.currentType = 'pop';
@@ -143,7 +143,7 @@ export default {
     // 首页多个数据请求封装
     getHomeMultidata() {
       getHomeMultidata().then((res) => {
-        console.log('数据测试: 成功调用该函数', res);
+        // console.log('数据测试: 成功调用该函数', res);
         this.banners = res.data.banner.list;
         this.recommends = res.data.recommend.list;
       })
@@ -154,7 +154,7 @@ export default {
       const page = this.goods[type].page + 1;
 
       getHomeGoods(type, page).then((res) => {
-        console.log('获取商品数据: ', res);
+        // console.log('获取商品数据: ', res);
         // 需要将数据 push 新问题: 如何将一个数组存放到另一个数组？ 
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;

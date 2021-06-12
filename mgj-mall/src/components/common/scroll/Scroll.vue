@@ -47,7 +47,7 @@ export default {
     // 监听是否滚动到底部
     if (this.pullUpLoad) {
       this.scroll.on('pullingUp', () => {
-        console.log('监听到滚动到底部');
+        // console.log('监听到滚动到底部');
         // alert('监听到滚动到底部') Scroll.vue 监听到传递给 Home.vue 子组件与父组件通信 $emit()
         this.$emit('pullingUp')
       });

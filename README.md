@@ -916,7 +916,7 @@
 + 顶部导航滚动
 
   ```javascript
-contentScroll(position) {
+  contentScroll(position) {
         let positionY = -position.y;
         let length = this.themeTopYs.length;
         //hack做法，
@@ -930,19 +930,13 @@ contentScroll(position) {
         this.isShowBackTop = Math.abs(position.y) > 1000;
     }
   ```
-  
-  
-  
+
 + `bug position:fixed`
 
-  
-
-  ```css
-  
-  position:fixed // 未生效
-  
+  ```scss
+position:fixed // 未生效
   ```
-
+  
 + `VueX[购物车数据]`使用
 
   + 安装

@@ -99,7 +99,6 @@ export default {
 
   methods: {
     homeTabClick(index) {
-      // console.log('$emit事件获取监听');
       console.log(index);
       switch (index) {
         case 0:

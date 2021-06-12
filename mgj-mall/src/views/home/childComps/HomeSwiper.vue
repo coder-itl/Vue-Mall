@@ -31,7 +31,9 @@ export default {
     SwiperItem
   },
   data() {
-    isLoad: false // 节流阀
+    return {
+      isLoad: false // 节流阀
+    }
   },
   methods: {
     // 轮播图图片加载完成监听 并发送给父组件

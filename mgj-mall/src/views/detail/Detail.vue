@@ -74,7 +74,7 @@ export default {
     getDetail(this.iid).then((res) => {
       // 1. 获取顶部的图片轮播数据
       const data = res.result;
-      console.log('数据信息: ', data);
+      // console.log('数据信息: ', data);
 
       // 2. 取出轮播图数据
       this.topImages = res.result.itemInfo.topImages;
@@ -94,7 +94,7 @@ export default {
       // 7. 取出评论的信息 【有的存在评论信息，有的不存在评论信息 进行判断过滤】 data.rate.cRate != 0 即为存在数据
       if (data.rate.cRate !== 0) {
         this.commentInfo = data.rate.list[0];
-        console.log('commentInfo data: ', this.commentInfo);
+        // console.log('commentInfo data: ', this.commentInfo);
       }
 
 
@@ -104,7 +104,7 @@ export default {
 
     // 3. 请求推荐数据
     getRecommend().then((res) => {
-      console.log('请求推荐数据: ', res);
+      // console.log('请求推荐数据: ', res);
       this.recommends = res.data.list;
     });
 
@@ -126,7 +126,7 @@ export default {
       this.getThemeTopY();
     },
     titleClick(index) {
-      console.log('title index', index);
+      // console.log('title index', index);
       // 使用 scrollTo(实现滚动)
       this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 500);
     },

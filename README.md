@@ -937,6 +937,9 @@
 position:fixed // 未生效
   ```
   
+
+
+
 + `VueX[购物车数据]`使用
 
   + 安装
@@ -982,8 +985,9 @@ position:fixed // 未生效
     
     // 导出 store 独享
     export default store
-    
     ```
+
+    
 
   + 挂载元素
 
@@ -1086,7 +1090,7 @@ position:fixed // 未生效
 
     + `windows`部署
 
-      ```bash
+      ```javascript
       # 命令行启动nginx产生如下错误:
       	
       	nginx: [emerg] bind() to 0.0.0.0:80 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)

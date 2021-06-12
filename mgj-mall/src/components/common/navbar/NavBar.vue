@@ -20,6 +20,7 @@
   line-height: 44px;
   box-shadow: 0 1px 1px #f5f5f5;
 }
+
 .nav-bar .left,
 .nav-bar .right {
   width: 100px;

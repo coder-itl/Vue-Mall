@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" ref="wrapper">
+  <div ref="wrapper" class="wrapper">
     <div class="content">
       <slot></slot>
     </div>
@@ -8,6 +8,7 @@
 
 <script>
 import BScroll from "better-scroll"
+
 export default {
   props: {
     probeType: {
@@ -61,7 +62,7 @@ export default {
       this.scroll && this.scroll.finishPullUp()
     },
     refresh() {
-      //  this.$refs.scroll.refresh(); 
+      //  this.$refs.scroll.refresh();
       this.scroll && this.scroll.refresh()
     },
     getScrollY() {

@@ -1013,7 +1013,7 @@
     > <img src="https://vuex.vuejs.org/vuex.png">
   
     + `action`
-   
+  
        ```javascript
 		   // 使用
 		   this.$store.dispatch('addCart', product); 

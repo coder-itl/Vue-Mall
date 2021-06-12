@@ -176,7 +176,7 @@ export default {
   },
   deactivated() {
     // 1. 保存 Y 值
-    this.saveY = this.$refs.scroll.getScollY();
+    this.saveY = this.$refs.scroll.getScrollY();
     // 2. 取消全局事件监听 【TODO: 为什么要取消全局事件监听】
     this.$bus.$off('itemImgLoad', this.itemImgListener)
   },

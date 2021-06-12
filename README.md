@@ -933,13 +933,10 @@
 
 + `bug position:fixed`
 
-  ```scss
+  ```css
 position:fixed // 未生效
   ```
   
-
-
-
 + `VueX[购物车数据]`使用
 
   + 安装
@@ -987,9 +984,7 @@ position:fixed // 未生效
     export default store
     ```
 
-    
-
-  + 挂载元素
+  + 挂在元素
 
     ```javascript
     main.js:
@@ -1005,18 +1000,16 @@ position:fixed // 未生效
 
   + `mutations`
 
-    > ```javascript
-    > 
-    > mutations 唯一的目的就是修改state中状态
-    > 
-    > mutations 中的每个方法尽可能完成的事比较单 一 一 点
-    > 
-    > Eg. actions  -> mulations
-    > 
-    > ```
-    >
-    > 
-    >
+    ```javascript
+    
+     mutations 唯一的目的就是修改state中状态
+    
+     mutations 中的每个方法尽可能完成的事比较单 一 一 点
+    
+     Eg. actions  -> mulations
+    
+    ```
+
     > <img src="https://vuex.vuejs.org/vuex.png">
     >
     > + `action`
@@ -1026,8 +1019,12 @@ position:fixed // 未生效
     >   this.$store.dispatch('addCart', product);
     >   
     >   ```
-    >
-    >   
+
+    
+
+    
+
+###  MGJ-Mall Day-08
 
 + `vue-lazyload`懒加载
 

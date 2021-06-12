@@ -36,6 +36,7 @@ import { itemListenerMinix, backTopMixin } from "common/mixin"
 
 
 export default {
+  name: "Detail",
   data() {
     return {
       iid: null,

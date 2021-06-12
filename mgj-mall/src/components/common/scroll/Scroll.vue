@@ -61,7 +61,7 @@ export default {
       this.scroll && this.scroll.finishPullUp()
     },
     refresh() {
-      //  this.$refs.scroll.refresh(); // 
+      //  this.$refs.scroll.refresh(); 
       this.scroll && this.scroll.refresh()
     },
     getScrollY() {

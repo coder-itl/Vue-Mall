@@ -1,4 +1,4 @@
-import debouce from './utils'
+import { debouce } from './utils'
 export const itemListenerMinix = {
   data() {
     return {

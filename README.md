@@ -913,6 +913,26 @@
   })
   ```
 
++ 顶部导航滚动
+
+  ```javascript
+contentScroll(position) {
+        let positionY = -position.y;
+        let length = this.themeTopYs.length;
+        //hack做法，
+      for (let i = 0; i < length; i++) {
+          if (this.currentIndex !== i && positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1]) {
+          this.currentIndex = i;
+            this.$refs.nav.currIndex = this.currentIndex;
+          }
+        }
+      // 是否显示backTop图标
+        this.isShowBackTop = Math.abs(position.y) > 1000;
+    }
+  ```
+  
+  
+  
 + `vue-lazyload`懒加载
 
   + 文档地址

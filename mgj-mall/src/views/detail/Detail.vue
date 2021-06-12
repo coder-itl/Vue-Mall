@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
-    <detail-nav-bar @titleClick="titleClick"></detail-nav-bar>
-    <scroll class="content" ref="scroll">
+    <detail-nav-bar @titleClick="titleClick" ref="nav"></detail-nav-bar>
+    <scroll class="content" ref="scroll" @scroll="contentScroll" :probe-type="3">
       <detail-swiper :top-images="topImages"></detail-swiper>
       <detail-base-info :goods="goods"></detail-base-info>
       <detail-shop-info :shop="shopInfo"></detail-shop-info>
@@ -43,7 +43,9 @@ export default {
       getThemeTopY: null,
       goodsParams: {},
       commentInfo: {},
-      recommends: []
+      recommends: [],
+      currentIndex: 0,
+      isShowBackTop: false
     }
   },
   // 混入初次使用
@@ -106,7 +108,8 @@ export default {
       this.themeTopYs.push(0), // 商品offsetTop
         this.themeTopYs.push(this.$refs.params.$el.offsetTop), //  参数offsetTop
         this.themeTopYs.push(this.$refs.comment.$el.offsetTop), // 评论的 offsetTop
-        this.themeTopYs.push(this.$refs.recommend.$el.offsetTop) // 推荐offsetTop
+        this.themeTopYs.push(this.$refs.recommend.$el.offsetTop),// 推荐offsetTop
+        this.themeTopYs.push(Number.MAX_VALUE)
     });
 
 
@@ -119,7 +122,23 @@ export default {
     },
     titleClick(index) {
       console.log('title index', index);
-      this.$refs.scroll.scrollTo(0, -this.themeTopYs[index]);
+      // 使用 scrollTo(实现滚动)
+      this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 500);
+    },
+
+    // 监听滚动
+    contentScroll(position) {
+      let positionY = -position.y;
+      let length = this.themeTopYs.length;
+      //hack做法，
+      for (let i = 0; i < length; i++) {
+        if (this.currentIndex !== i && positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1]) {
+          this.currentIndex = i;
+          this.$refs.nav.currIndex = this.currentIndex;
+        }
+      }
+      // 是否显示backTop图标
+      this.isShowBackTop = Math.abs(position.y) > 1000;
     }
   },
   destroyed() {

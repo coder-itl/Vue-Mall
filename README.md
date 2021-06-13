@@ -906,10 +906,69 @@
 + `toast`封装
 
   ```javascript
+  import Toast from './Toast'
   
+  const obj = {}
+  
+  obj.install = function (Vue) {
+    // 1. 创建组件构造器
+    const toastConstructor = Vue.extend(Toast)
+  
+    // 2.new的方式，根据组件构造器，创建一个组件对象
+    const toast = new toastConstructor()
+  
+    // 3.将组件对象手动挂载到某一个DOM元素上
+    toast.$mount(document.createElement('div'))
+  
+    // 4.toast.$el对应的就是div
+    document.body.appendChild(toast.$el)
+  
+    Vue.prototype.$toast = toast
+  }
+  export default obj
+  
+  
+  main.js:
+      import toast from "file-path"
+      Vue.use(toast)
+  
+  使用:
+  	 this.$toast.show(res, 2000)
+  
+  
+  
+  show函数封装:
+  
+  	show(message, duration = 2000) {
+        this.message = message;
+        this.isShow = true;
+  
+        //  可以用setTimeout实现，也可以用动画实现
+        setTimeout(() => {
+          this.isShow = false;
+          this.message = '';
+        }, duration);
+      }
   ```
 
-  
++ `fastclick`解决`300ms`延迟
+
+  + 安装
+
+    ```bash
+    npm install fastclick --save
+    ```
+
+  + 使用
+
+    ```javascript
+    main.js:
+    	import FastClick from 'fastclick'
+    	FastClick.attach(document.body)
+    	
+    ```
+
+    
 
 
 
@@ -1174,4 +1233,29 @@
       
 
     + `Linux`部署
+    
+      ```javascript
+      # yum 安装
+      yum install nginx
+      
+      # 开启 nginx 服务
+      systemctl start nginx.service
+      
+      # 跟随系统启动
+      systemctl enable nginx.service
+      ```
+    
+    + 面试题
+    
+      ```javascript
+      1. 如何理解 Vue 生命周期
+      
+      2. 如何进行非父子组件通信
+      
+      3. Vue响应式原理
+      ```
+    
+      + `Vue响应式原理`
+    
+        > 
 

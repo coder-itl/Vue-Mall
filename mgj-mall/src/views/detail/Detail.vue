@@ -13,6 +13,7 @@
 
     <detail-bottom-bar @addCart="addToCart" class="bottom-bar"></detail-bottom-bar>
     <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
+
   </div>
 </template>
 
@@ -49,7 +50,8 @@ export default {
       goodsParams: {},
       commentInfo: {},
       recommends: [],
-      currentIndex: 0
+      currentIndex: 0,
+
     }
   },
   // 混入初次使用
@@ -66,6 +68,7 @@ export default {
     DetailBottomBar,
     Scroll
   },
+
   created() {
     // 1. 保存传入的 iid
     this.iid = this.$route.params.iid;
@@ -151,7 +154,9 @@ export default {
       product.price = this.goods.realPrice;
       product.iid = this.iid;
       // 2. 将商品添加到购物车里
-      this.$store.dispatch('addCart', product);
+      this.$store.dispatch('addCart', product).then((res) => {
+        this.$toast.show(res, 2000)
+      });
     }
 
   },

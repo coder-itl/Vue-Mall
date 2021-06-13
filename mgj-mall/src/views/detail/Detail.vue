@@ -11,7 +11,7 @@
       <goods-list :goods="recommends" ref="recommend"></goods-list>
     </scroll>
 
-    <detail-bottom-bar @addCart="addToCart"></detail-bottom-bar>
+    <detail-bottom-bar @addCart="addToCart" class="bottom-bar"></detail-bottom-bar>
     <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   </div>
 </template>
@@ -172,5 +172,12 @@ export default {
 .content {
   background-color: #fff;
   height: calc(100% - 44px);
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 </style>

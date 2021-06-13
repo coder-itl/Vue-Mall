@@ -880,6 +880,35 @@
   
   ```
 
++ `iid`传入为什么没有变化
+
+  ```javascript
+  主要原因误解 params 和 query
+  
+  
+  export function getDetail(iid) {
+    return request({
+      url: '/detail',
+      params: {
+        iid,
+      },
+    })
+  }
+  
+  
+  
+  保存 iid: this.iid = this.$route.params.iid;
+  
+  
+  
+  ```
+
++ `toast`封装
+
+  ```javascript
+  
+  ```
+
   
 
 

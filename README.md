@@ -1,5 +1,9 @@
 ### Vue 项目文档
 
++ 效果总览
+
+  <img src="mgj-min.gif">
+
 - 项目拉取
 
   ```bash

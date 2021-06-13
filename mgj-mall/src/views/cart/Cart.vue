@@ -1,13 +1,15 @@
 <template>
   <div id="cart">
     <nav-bar class="nav-bar">
-      <div slot="center" class="center">购物车({{count}})</div>
+      <div slot="center" class="center">购物车({{cartLength}})</div>
     </nav-bar>
   </div>
 </template>
 
 <script>
 import NavBar from 'components/common/navbar/NavBar.vue'
+
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Cart',
@@ -16,8 +18,14 @@ export default {
   },
   data() {
     return {
-      count: 0
+
     }
+  },
+  computed: {
+    /* CartLength() {
+      return this.$store.getters.cartLength
+    } */
+    ...mapGetters(['cartLength'])
   }
 }
 

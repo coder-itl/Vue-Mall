@@ -913,7 +913,7 @@
 	  })
   ```
 
-+ 顶部导航滚动
++ 顶部导航滚动发生联动变化
 
   ```javascript
 	  contentScroll(position) {
@@ -984,7 +984,7 @@
 		export default store
     ```
 
-  + 挂在元素
+  + 挂载元素
 
     ```javascript
 		main.js:
@@ -1021,7 +1021,38 @@
 
     
 
++ `getters`封装
+
+  ![SM-getters.png](https://i.loli.net/2021/06/13/WKZ1pXYIOlThQr3.png)
+
+  
+
+  + 如何将`getters`转换为计算属性使用
+
+    ```javascript
+    import {mapGetters} from 'vuex'
     
+    // 使用对象展开运算符将 getter 混入 computed 对象中
+    
+    // 语法一
+    ...mapGetters([
+       		'指定要转换的getters函数名'
+          // ...
+        ])
+    
+    
+    // 语法二
+    ...mapGetters({
+        length: '指定要转换的getters函数名'， // length 类似于别名映射
+        ...
+    })
+    ```
+
+    
+
+  
+
+  
 
 ###  MGJ-Mall Day-08
 

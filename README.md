@@ -4,6 +4,18 @@
 
   <img src="mgj-min.gif">
 
+- 项目部署查看
+
+  ```javascript
+  # GitPages部署失败，Nginx部署成功
+  ```
+
+- `Vue`部署教程
+
+  ```java
+  https://cli.vuejs.org/zh/guide/deployment.html#github-pages
+  ```
+
 - 项目拉取
 
   ```bash
